@@ -1,17 +1,18 @@
 #include "scene/scene.h"
 #include <GL/glut.h>
 
-Scene* scene;
+Scene *scene;
 
-void redraw(){
+void redraw()
+{
 	scene->draw();
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(600,600);
+	glutInitWindowSize(600, 600);
 	glutCreateWindow("GeoPulse");
 
 	scene = new Scene();

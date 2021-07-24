@@ -1,32 +1,24 @@
 #include "scene.h"
-
 #include <GL/glut.h>
 
-Scene::Scene(){
+Scene::Scene()
+{
+    //background
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    //drawing color
+    glColor3f(0.0f, 1.0f, 0.0f);
 
-	//background
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
-
-	//drawing color
-	glColor3f(0.0f, 1.0f, 0.0f);
+    shapes.push_back(Shape(6, 0.5));
 }
 
-void Scene::draw() {
-
-    GLfloat x,y;
-
+void Scene::draw()
+{
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glBegin(GL_LINES);
-
-    x = 0.5f;
-    y = 0.5f;
-    glVertex3f(x, y, 0);
-    x = 1.0f;
-    y = 1.0f;
-    glVertex3f(x, y, 0);
-
-    glEnd();
+    for (Shape &shape : shapes)
+    {
+        shape.draw();
+    }
 
     glutSwapBuffers();
 }

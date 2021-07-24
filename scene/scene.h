@@ -1,9 +1,11 @@
 #include "shape.h"
 #include <list>
 
-class Scene {
+class Scene
+{
     float beat;
-    std::list<Shape*> shapes;
+    std::list<Shape> shapes;
+
 public:
     Scene();
     void draw();
