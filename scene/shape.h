@@ -17,7 +17,7 @@ public:
      * @param n Number of vertices
      * @param r Radius
      */
-    Shape(int n, float r);
+    Shape(int n, float r, InputProvider& t);
 
     /**
      * @brief Draw the shape

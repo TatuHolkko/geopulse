@@ -4,6 +4,7 @@
  *        with two polar coordinates, describin a sub and a super orbit.
  */
 #include <utility>
+#include "../dance/timer.h"
 
 class Vertex
 {
@@ -12,6 +13,7 @@ class Vertex
     float b;
     float r;
     float s;
+    InputProvider* t;
 
 public:
     /**
@@ -22,7 +24,7 @@ public:
      * @param r Super orbit radius
      * @param s Sub orbit radius
      */
-    Vertex(float a, float b, float r, float s);
+    Vertex(float a, float b, float r, float s, InputProvider& t);
 
     /**
      * @brief Get cardinal coordinates

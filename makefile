@@ -1,6 +1,7 @@
 
 CPPFILES = $(wildcard *.cpp)
 CPPFILES += $(wildcard scene/*.cpp)
+CPPFILES += $(wildcard dance/*.cpp)
 
 OBJFILES = $(CPPFILES:.cpp=.o)
 OUT      = geopulse

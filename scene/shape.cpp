@@ -3,11 +3,11 @@
 
 #define PI 3.14159f
 
-Shape::Shape(int n, float r)
+Shape::Shape(int n, float r, InputProvider& t)
 {
     for (int i = 0; i < n; i++)
     {
-        Vertex v = Vertex(PI * 2 / n * i, 0, r, 0);
+        Vertex v = Vertex(PI * 2 / n * i, 0, r, 0, t);
 
         vertices.push_back(v);
     }

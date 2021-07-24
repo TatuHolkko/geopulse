@@ -1,4 +1,5 @@
 #include "shape.h"
+#include "../dance/inputprovider.h"
 #include <list>
 
 class Scene
@@ -7,6 +8,6 @@ class Scene
     std::list<Shape> shapes;
 
 public:
-    Scene();
+    Scene(InputProvider& t);
     void draw();
 };
