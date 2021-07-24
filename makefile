@@ -7,7 +7,7 @@ OUT      = geopulse
 
 INCLUDES += -I/usr/include/GL
 
-CXXFLAGS += -Wall $(INCLUDES)
+CXXFLAGS += -Wall $(INCLUDES) -g
 
 LDFLAGS  += -L/usr/lib/x86_64-linux-gnu
 LDFLAGS  += -L/usr/lib/libGL
