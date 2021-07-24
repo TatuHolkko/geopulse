@@ -1,4 +1,7 @@
+
 CPPFILES = $(wildcard *.cpp)
+CPPFILES += $(wildcard scene/*.cpp)
+
 OBJFILES = $(CPPFILES:.cpp=.o)
 OUT      = geopulse
 
@@ -14,6 +17,9 @@ LDLIBS   += -lGL -lGLU -lglut
 
 $(OUT): $(OBJFILES)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+	@echo "Done compiling!"
+	@echo
+	@echo
 
 
 .PHONY: clean
