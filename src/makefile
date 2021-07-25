@@ -7,7 +7,7 @@ BUILDDIR := $(PROJDIR)/build
 TARGET = geopulse
 
 # Decide whether the commands will be shwon or not
-VERBOSE = TRUE
+VERBOSE = FALSE
 
 # Create the list of directories
 DIRS = dance scene adjustable

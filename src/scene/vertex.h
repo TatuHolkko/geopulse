@@ -14,10 +14,10 @@
 class Vertex
 {
 
-    Adjustable a;
-    Adjustable b;
-    Adjustable r;
-    Adjustable s;
+    Adjustable *a;
+    Adjustable *b;
+    Adjustable *r;
+    Adjustable *s;
 
 public:
     /**
@@ -28,7 +28,7 @@ public:
      * @param r Super orbit radius
      * @param s Sub orbit radius
      */
-    Vertex(Adjustable a, Adjustable b, Adjustable r, Adjustable s);
+    Vertex(Adjustable &a, Adjustable &b, Adjustable &r, Adjustable &s);
 
     /**
      * @brief Get cardinal coordinates

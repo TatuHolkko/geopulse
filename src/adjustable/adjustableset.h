@@ -13,16 +13,17 @@
 class AdjustableSet
 {
 private:
-    std::list<Adjustable*> adjustables;
+    std::list<Adjustable *> adjustables;
     MapFunction fn;
     MapperParameters base;
     MapperParameters delta;
     InputProvider *ip;
+    int n;
 
 public:
     AdjustableSet();
     ~AdjustableSet();
-    
+
     /**
      * @brief Construct a new Adjustable Set object
      * 
@@ -42,6 +43,15 @@ public:
      * @return Adjustable&
      */
     Adjustable &generate();
+
+    /**
+     * @brief Create a constant Adjustable without changing the parameters
+     * 
+     * @param value The constant value
+     * 
+     * @return Adjustable& 
+     */
+    Adjustable &constant(float value);
 };
 
 #endif

@@ -10,9 +10,10 @@ class Scene
 {
     float beat;
     std::list<Shape> shapes;
+    AdjustableSet adset;
 
 public:
-    Scene(InputProvider& t);
+    Scene(InputProvider& ip);
     void draw();
 };
 

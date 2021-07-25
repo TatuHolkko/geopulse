@@ -18,7 +18,6 @@ private:
     bool fixed;
 
 public:
-    
     /**
      * @brief Construct a new Adjustable object
      * 
@@ -27,7 +26,7 @@ public:
      * @param m Mapper for the Dancer object
      * @param ip input provider
      */
-    Adjustable(float value, bool fixed, Mapper m, InputProvider& ip);
+    Adjustable(float value, bool fixed, Mapper m, InputProvider &ip);
     /**
      * @brief Construct a new Adjustable object that is fixed
      * 

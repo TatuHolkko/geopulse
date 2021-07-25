@@ -3,20 +3,18 @@
 
 #define PI 3.14159f
 
-Shape::Shape(int n, float r, InputProvider& ip)
+Shape::Shape(int n, AdjustableSet& adjustables)
 {
+    this->adjustables = &adjustables;
 
-    MapperParameters base {0, 1, 0.1, 0.5}; 
-    MapperParameters delta{0, 0, 0, 0};
-
-    adjustables = AdjustableSet(Sine, base, delta, ip);
     for (int i = 0; i < n; i++)
     {
         Vertex v = Vertex(
-            Adjustable(PI * 2 / n * i), 
-            Adjustable(0), 
-            adjustables.generate(), 
-            Adjustable(0)
+            // TODO: configure this somewhere else?
+            this->adjustables->constant(PI * 2 / n * i), 
+            this->adjustables->constant(0), 
+            this->adjustables->generate(), 
+            this->adjustables->constant(0)
             );
 
         vertices.push_back(v);

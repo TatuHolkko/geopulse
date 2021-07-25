@@ -14,17 +14,16 @@ class Shape
 {
 
     std::list<Vertex> vertices;
-    AdjustableSet adjustables;
+    AdjustableSet* adjustables;
 
 public:
     /**
      * @brief Construct a new Shape object
      *
      * @param n Number of vertices
-     * @param r Radius
-     * @param ip input provider for adjustables
+     * @param adjustables adjustables for the vertices
      */
-    Shape(int n, float r, InputProvider& ip);
+    Shape(int n, AdjustableSet& adjustables);
 
     /**
      * @brief Draw the shape
