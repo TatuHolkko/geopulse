@@ -2,7 +2,7 @@
 #include "../dance/inputprovider.h"
 #include <list>
 
-class Scene
+class Scene 
 {
     float beat;
     std::list<Shape> shapes;
