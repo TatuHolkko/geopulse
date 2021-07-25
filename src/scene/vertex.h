@@ -3,17 +3,21 @@
  * @brief The building component of shapes. Vertex obnjects are describe
  *        with two polar coordinates, describin a sub and a super orbit.
  */
+
+#ifndef VERTEX_H
+#define VERTEX_H
+
 #include <utility>
 #include "../dance/timer.h"
+#include "../adjustable/adjustable.h"
 
 class Vertex
 {
 
-    float a;
-    float b;
-    float r;
-    float s;
-    InputProvider* t;
+    Adjustable a;
+    Adjustable b;
+    Adjustable r;
+    Adjustable s;
 
 public:
     /**
@@ -24,7 +28,7 @@ public:
      * @param r Super orbit radius
      * @param s Sub orbit radius
      */
-    Vertex(float a, float b, float r, float s, InputProvider& t);
+    Vertex(Adjustable a, Adjustable b, Adjustable r, Adjustable s);
 
     /**
      * @brief Get cardinal coordinates
@@ -33,3 +37,5 @@ public:
      */
     std::pair<float, float> getPos();
 };
+
+#endif

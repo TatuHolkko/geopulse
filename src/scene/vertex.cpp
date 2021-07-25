@@ -2,21 +2,19 @@
 #include "../dance/dance.h"
 #include <cmath>
 
-Vertex::Vertex(float a, float b, float r, float s, InputProvider &t)
+Vertex::Vertex(Adjustable a, Adjustable b, Adjustable r, Adjustable s)
 {
     this->a = a;
     this->b = b;
     this->r = r;
     this->s = s;
-    this->t = &t;
 }
 
 std::pair<float, float> Vertex::getPos()
 {
-    Dancer angles = Dancer(Mapper(Sine, 0, 4, 0.1, 0.5), *t);
-    float x = sin(a) * r*angles.get();
-    float y = cos(a) * r*angles.get();
-    x += sin(b) * s;
-    y += cos(b) * s;
+    float x = sin(a.get()) * r.get();
+    float y = cos(a.get()) * r.get();
+    x += sin(b.get()) * s.get();
+    y += cos(b.get()) * s.get();
     return std::make_pair(x, y);
 }

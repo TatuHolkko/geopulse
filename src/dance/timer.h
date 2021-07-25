@@ -6,10 +6,10 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "inputprovider.h"
+#include "../adjustable/inputprovider.h"
 
 // number at which the beats wrap back to zero
-#define BEATS_MAX 64
+#define BEATS_MAX 360
 
 class Timer : public InputProvider {
 private:

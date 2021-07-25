@@ -1,6 +1,10 @@
 #include "shape.h"
-#include "../dance/inputprovider.h"
+#include "../adjustable/inputprovider.h"
 #include <list>
+
+
+#ifndef SCENE_H
+#define SCENE_H
 
 class Scene 
 {
@@ -11,3 +15,5 @@ public:
     Scene(InputProvider& t);
     void draw();
 };
+
+#endif

@@ -8,7 +8,7 @@ Scene::Scene(InputProvider& t)
     //drawing color
     glColor3f(0.0f, 1.0f, 0.0f);
 
-    shapes.push_back(Shape(6, 0.5, t));
+    shapes.push_back(Shape(10, 0.5, t));
 }
 
 void Scene::draw()

@@ -8,9 +8,11 @@
  * will dictate what the value is.
  */
 
+#ifndef DANCE_H
+#define DANCE_H
+
 #include "mapper.h"
-#include "inputprovider.h"
-#include "../dance/inputprovider.h"
+#include "../adjustable/inputprovider.h"
 
 class Dancer
 {
@@ -20,6 +22,7 @@ private:
     float sine(float value);
 
 public:
+    Dancer();
     /**
      * @brief Construct a new Dancer object
      * 
@@ -36,3 +39,5 @@ public:
      */
     float get();
 };
+
+#endif
