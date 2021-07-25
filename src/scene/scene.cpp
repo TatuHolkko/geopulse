@@ -1,19 +1,28 @@
 #include "scene.h"
 #include <GL/glut.h>
 
-Scene::Scene(InputProvider &ip)
+Scene::Scene(
+    MapFunction fn,
+    MapperParameters base,
+    MapperParameters subdelta,
+    MapperParameters subdeltadelta,
+    MapperParameters superdelta,
+    InputProvider &ip) : superset(AdjustableSuperSet(fn,
+                                                     base,
+                                                     subdelta,
+                                                     subdeltadelta,
+                                                     superdelta,
+                                                     ip))
+
 {
     //background
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     //drawing color
     glColor3f(0.0f, 1.0f, 0.0f);
 
-    MapperParameters base = {0, 2, 0.1, 0.5};
-    MapperParameters delta = {1, 0, 0, 0};
-
-    this->adset = AdjustableSet(Sine, base, delta, ip);
-
-    shapes.push_back(Shape(10, adset));
+    for(int i = 0; i < 6; i++){
+        shapes.push_back(Shape(6+2*i, superset.generate()));
+    }
 }
 
 void Scene::draw()

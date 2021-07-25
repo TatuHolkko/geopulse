@@ -28,10 +28,20 @@ int main(int argc, char *argv[])
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(600, 600);
+	glutInitWindowSize(800, 800);
 	glutCreateWindow("GeoPulse");
 
-	scene = new Scene(*timer);
+	MapperParameters base = {0, 6, 0.2, 0.2};
+	MapperParameters subdelta = {1, 0, 0, 0};
+	MapperParameters subdeltadelta = {0, 0, 0, 0};
+	MapperParameters superdelta = {0, 2, -0.04, 0.2};
+
+	scene = new Scene(Sine,
+					  base,
+					  subdelta,
+					  subdeltadelta,
+					  superdelta,
+					  *timer);
 
 	glutDisplayFunc(redraw);
 	glutTimerFunc(TICK_DURATION, &tick, 0);

@@ -12,7 +12,7 @@
 
 class Shape
 {
-
+private:
     std::list<Vertex> vertices;
     AdjustableSet* adjustables;
 

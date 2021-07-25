@@ -1,4 +1,5 @@
 #include "shape.h"
+#include "../adjustable/adjustablesuperset.h"
 #include "../adjustable/inputprovider.h"
 #include <list>
 
@@ -10,10 +11,18 @@ class Scene
 {
     float beat;
     std::list<Shape> shapes;
-    AdjustableSet adset;
+    AdjustableSuperSet superset;
 
 public:
-    Scene(InputProvider& ip);
+
+    Scene(
+        MapFunction fn,
+        MapperParameters base,
+        MapperParameters subdelta,
+        MapperParameters subdeltadelta,
+        MapperParameters superdelta,
+        InputProvider& ip);
+
     void draw();
 };
 
