@@ -7,23 +7,29 @@
 #define SHAPE_H
 
 #include "vertex.h"
-#include "../adjustable/adjustableset.h"
+#include "../dynamic/dynamicset.h"
 #include <list>
 
 class Shape
 {
 private:
     std::list<Vertex> vertices;
-    AdjustableSet* adjustables;
 
 public:
     /**
      * @brief Construct a new Shape object
-     *
+     * 
      * @param n Number of vertices
-     * @param adjustables adjustables for the vertices
+     * @param superOrbitAngles Super orbit angle dynamics
+     * @param subOrbitAngles   Sub orbit angle dynamics
+     * @param superOrbitRadii  Super orbit radius dynamics
+     * @param subOrbitRadii    Sub orbit radius dynamics
      */
-    Shape(int n, AdjustableSet& adjustables);
+    Shape(int n, 
+    DynamicSet<float>& superOrbitAngles,
+    DynamicSet<float>& subOrbitAngles,
+    DynamicSet<float>& superOrbitRadii,
+    DynamicSet<float>& subOrbitRadii);
 
     /**
      * @brief Draw the shape

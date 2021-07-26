@@ -12,9 +12,11 @@
 #define DANCE_H
 
 #include "mapper.h"
-#include "../adjustable/inputprovider.h"
+#include "../dynamic/dynamic.h"
+#include "../dynamic/inputprovider.h"
 
-class Dancer
+template<typename T>
+class Dancer : public Dynamic<T>
 {
 private:
     Mapper mapper;
@@ -37,7 +39,7 @@ public:
      * 
      * @return float
      */
-    float get();
+    T get();
 };
 
 #endif

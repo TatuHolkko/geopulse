@@ -7,7 +7,7 @@
 #ifndef MAPPER_H
 #define MAPPER_H
 
-enum MapFunction
+enum MapperFunction
 {
     Sine
 };
@@ -37,11 +37,10 @@ MapperParameters operator*(
     const MapperParameters &a,
     const int n);
 
-// Mapper function and it's parameters
 class Mapper
 {
 private:
-    MapFunction function;
+    MapperFunction function;
     MapperParameters params;
     float sine(float input);
 
@@ -52,7 +51,7 @@ public:
      * @param fn Function type
      * @param params Parameters for the function
      */
-    Mapper(MapFunction fn, MapperParameters params);
+    Mapper(MapperFunction fn, MapperParameters params);
     Mapper();
     float getValue(float input);
 };

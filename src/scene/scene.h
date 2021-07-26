@@ -1,27 +1,27 @@
 #include "shape.h"
-#include "../adjustable/adjustablesuperset.h"
-#include "../adjustable/inputprovider.h"
+#include "../dynamic/dynamicsuperset.h"
+#include "../dynamic/inputprovider.h"
 #include <list>
-
 
 #ifndef SCENE_H
 #define SCENE_H
 
-class Scene 
+class Scene
 {
     float beat;
     std::list<Shape> shapes;
-    AdjustableSuperSet superset;
+    DynamicSuperset<float> superOrbitAngleSuperset;
+    DynamicSuperset<float> subOrbitAngleSuperset;
+    DynamicSuperset<float> superOrbitRadiusSuperset;
+    DynamicSuperset<float> subOrbitRadiusSuperset;
 
 public:
-
-    Scene(
-        MapFunction fn,
-        MapperParameters base,
-        MapperParameters subdelta,
-        MapperParameters subdeltadelta,
-        MapperParameters superdelta,
-        InputProvider& ip);
+    Scene(MapperFunction fn,
+          MapperSuperParameters superOrbitAngleSuperParams,
+          MapperSuperParameters subOrbitAngleSuperParams,
+          MapperSuperParameters superOrbitRadiusSuperParams,
+          MapperSuperParameters subOrbitRadiusSuperParams,
+          InputProvider &ip);
 
     void draw();
 };

@@ -6,7 +6,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "../adjustable/inputprovider.h"
+#include "../dynamic/inputprovider.h"
 
 // number at which the beats wrap back to zero
 #define BEATS_MAX 360

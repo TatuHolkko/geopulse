@@ -9,15 +9,15 @@
 
 #include <utility>
 #include "../dance/timer.h"
-#include "../adjustable/adjustable.h"
+#include "../dynamic/dynamic.h"
 
 class Vertex
 {
 
-    Adjustable *a;
-    Adjustable *b;
-    Adjustable *r;
-    Adjustable *s;
+    Dynamic<float> *a;
+    Dynamic<float> *b;
+    Dynamic<float> *r;
+    Dynamic<float> *s;
 
 public:
     /**
@@ -28,7 +28,7 @@ public:
      * @param r Super orbit radius
      * @param s Sub orbit radius
      */
-    Vertex(Adjustable &a, Adjustable &b, Adjustable &r, Adjustable &s);
+    Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s);
 
     /**
      * @brief Get cardinal coordinates

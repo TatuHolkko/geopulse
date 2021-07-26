@@ -9,7 +9,7 @@ Mapper::Mapper()
     this->params = MapperParameters{0};
 }
 
-Mapper::Mapper(MapFunction fn, MapperParameters params)
+Mapper::Mapper(MapperFunction fn, MapperParameters params)
 {
     this->function = fn;
     this->params = params;

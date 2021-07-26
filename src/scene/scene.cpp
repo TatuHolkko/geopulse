@@ -2,17 +2,26 @@
 #include <GL/glut.h>
 
 Scene::Scene(
-    MapFunction fn,
-    MapperParameters base,
-    MapperParameters subdelta,
-    MapperParameters subdeltadelta,
-    MapperParameters superdelta,
-    InputProvider &ip) : superset(AdjustableSuperSet(fn,
-                                                     base,
-                                                     subdelta,
-                                                     subdeltadelta,
-                                                     superdelta,
-                                                     ip))
+    MapperFunction fn,
+    MapperSuperParameters superOrbitAngleSuperParams,
+    MapperSuperParameters subOrbitAngleSuperParams,
+    MapperSuperParameters superOrbitRadiusSuperParams,
+    MapperSuperParameters subOrbitRadiusSuperParams,
+    InputProvider &ip) : superOrbitAngleSuperset(fn,
+                                                 superOrbitAngleSuperParams,
+                                                 ip),
+
+                         subOrbitAngleSuperset(fn,
+                                               subOrbitAngleSuperParams,
+                                               ip),
+
+                         superOrbitRadiusSuperset(fn,
+                                                  superOrbitRadiusSuperParams,
+                                                  ip),
+
+                         subOrbitRadiusSuperset(fn,
+                                                subOrbitRadiusSuperParams,
+                                                ip)
 
 {
     //background
@@ -20,8 +29,15 @@ Scene::Scene(
     //drawing color
     glColor3f(0.0f, 1.0f, 0.0f);
 
-    for(int i = 0; i < 6; i++){
-        shapes.push_back(Shape(6+2*i, superset.generate()));
+    for (int i = 0; i < 3; i++)
+    {
+        int n_vertices = 6;
+        shapes.push_back(Shape(
+            n_vertices,
+            superOrbitAngleSuperset.generate(),
+            subOrbitAngleSuperset.generate(),
+            superOrbitRadiusSuperset.generate(),
+            subOrbitRadiusSuperset.generate()));
     }
 }
 

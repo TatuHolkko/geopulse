@@ -10,6 +10,8 @@ Timer *timer;
 
 #define BPM 175
 
+#define PI 3.14159f
+
 void redraw()
 {
 	scene->draw();
@@ -31,16 +33,39 @@ int main(int argc, char *argv[])
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("GeoPulse");
 
-	MapperParameters base = {0, 6, 0.2, 0.2};
-	MapperParameters subdelta = {1, 0, 0, 0};
-	MapperParameters subdeltadelta = {0, 0, 0, 0};
-	MapperParameters superdelta = {0, 2, -0.04, 0.2};
+	MapperSuperParameters superAngle = {
+		{0, 1, 0, 0},		 //base
+		{0, 0, 0, 0},		 //baseDelta
+		{0, 0, 0, PI / 3.0}, //deltaBase
+		{0, 0, 0, 0}		 //deltaBaseDelta
+	};
+
+	MapperSuperParameters subAngle = {
+		{0, 1, 0, 0}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
+
+	MapperSuperParameters superRadius = {
+		{0, 4, 0.1, 0.5}, //base
+		{0, 0, 0, 0.2},	  //baseDelta
+		{0, 0, 0, 0},	  //deltaBase
+		{0, 0, 0, 0}	  //deltaBaseDelta
+	};
+
+	MapperSuperParameters subRadius = {
+		{0, 1, 0, 0}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
 
 	scene = new Scene(Sine,
-					  base,
-					  subdelta,
-					  subdeltadelta,
-					  superdelta,
+					  superAngle,
+					  subAngle,
+					  superRadius,
+					  subRadius,
 					  *timer);
 
 	glutDisplayFunc(redraw);

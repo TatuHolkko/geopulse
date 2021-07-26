@@ -3,18 +3,22 @@
 
 #define PI 3.14159f
 
-Shape::Shape(int n, AdjustableSet& adjustables)
+Shape::Shape(
+    int n, 
+    DynamicSet<float>& superOrbitAngles,
+    DynamicSet<float>& subOrbitAngles,
+    DynamicSet<float>& superOrbitRadii,
+    DynamicSet<float>& subOrbitRadii)
 {
-    this->adjustables = &adjustables;
 
     for (int i = 0; i < n; i++)
     {
         Vertex v = Vertex(
-            // TODO: configure this somewhere else?
-            this->adjustables->constant(PI * 2 / n * i), 
-            this->adjustables->constant(0), 
-            this->adjustables->generate(), 
-            this->adjustables->constant(0)
+            // (PI * 2 / n * i)
+            superOrbitAngles.generate(), 
+            subOrbitAngles.generate(), 
+            superOrbitRadii.generate(), 
+            subOrbitRadii.generate()
             );
 
         vertices.push_back(v);

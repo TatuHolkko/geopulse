@@ -2,7 +2,7 @@
 #include "../dance/dance.h"
 #include <cmath>
 
-Vertex::Vertex(Adjustable &a, Adjustable &b, Adjustable &r, Adjustable &s)
+Vertex::Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s)
 {
     this->a = &a;
     this->b = &b;
