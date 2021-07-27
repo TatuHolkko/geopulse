@@ -28,6 +28,11 @@ Scene::Scene(
 
     int n_vertices = 6;
 
+    // adjust super orbit angle deltaBase offset so that each vertex has a default angle that will
+    // spread the vertices evenly to create a regular polygon
+    superOrbitAngleSuperParams.deltaBase.offset += 2.0f * PI / n_vertices;
+    superOrbitAngleSuperset = DynamicSuperset<float>(superOrbitAngleSuperParams, ip);
+
     for (int i = 0; i < 6; i++)
     {
         
