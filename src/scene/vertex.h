@@ -11,9 +11,15 @@
 #include "../dance/timer.h"
 #include "../dynamic/dynamic.h"
 
-class Vertex
-{
+// if used as an input provider, what property to return
+enum ProviderType {
+    Radius,
+    Angle
+};
 
+class Vertex : public InputProvider
+{
+    ProviderType providerType;
     Dynamic<float> *a;
     Dynamic<float> *b;
     Dynamic<float> *r;
@@ -27,8 +33,9 @@ public:
      * @param b Sub orbit angle
      * @param r Super orbit radius
      * @param s Sub orbit radius
+     * @param providerType type of input provided by the vertex
      */
-    Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s);
+    Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s, ProviderType providerType);
 
     /**
      * @brief Get cardinal coordinates
@@ -36,6 +43,13 @@ public:
      * @return std::pair<float,float> (x,y)
      */
     std::pair<float, float> getPos();
+
+    /**
+     * @brief Return value dictated by providerType
+     * 
+     * @return float 
+     */
+    float provideInput();
 };
 
 #endif

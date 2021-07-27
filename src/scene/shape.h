@@ -24,12 +24,14 @@ public:
      * @param subOrbitAngles   Sub orbit angle dynamics
      * @param superOrbitRadii  Super orbit radius dynamics
      * @param subOrbitRadii    Sub orbit radius dynamics
+     * @param providerType type of input provided by vertices
      */
-    Shape(int n, 
-    DynamicSet<float>& superOrbitAngles,
-    DynamicSet<float>& subOrbitAngles,
-    DynamicSet<float>& superOrbitRadii,
-    DynamicSet<float>& subOrbitRadii);
+    Shape(int n,
+          DynamicSet<float> &superOrbitAngles,
+          DynamicSet<float> &subOrbitAngles,
+          DynamicSet<float> &superOrbitRadii,
+          DynamicSet<float> &subOrbitRadii,
+          ProviderType providerType);
 
     /**
      * @brief Draw the shape

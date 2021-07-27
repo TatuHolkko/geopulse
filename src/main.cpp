@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 					  subAngle,
 					  superRadius,
 					  subRadius,
+					  Radius,
 					  *timer);
 
 	glutDisplayFunc(redraw);

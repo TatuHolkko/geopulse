@@ -2,7 +2,7 @@
 #include "../dance/dance.h"
 #include <cmath>
 
-Vertex::Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s)
+Vertex::Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s, ProviderType providerType)
 {
     this->a = &a;
     this->b = &b;
@@ -17,4 +17,11 @@ std::pair<float, float> Vertex::getPos()
     x += sin(b->get()) * s->get();
     y += cos(b->get()) * s->get();
     return std::make_pair(x, y);
+}
+
+float Vertex::provideInput(){
+    if (providerType == Radius){
+        return r->get();
+    }
+    return a->get(); 
 }

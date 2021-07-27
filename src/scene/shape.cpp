@@ -8,7 +8,8 @@ Shape::Shape(
     DynamicSet<float>& superOrbitAngles,
     DynamicSet<float>& subOrbitAngles,
     DynamicSet<float>& superOrbitRadii,
-    DynamicSet<float>& subOrbitRadii)
+    DynamicSet<float>& subOrbitRadii,
+    ProviderType providerType)
 {
 
     for (int i = 0; i < n; i++)
@@ -18,7 +19,8 @@ Shape::Shape(
             superOrbitAngles.generate(), 
             subOrbitAngles.generate(), 
             superOrbitRadii.generate(), 
-            subOrbitRadii.generate()
+            subOrbitRadii.generate(),
+            providerType
             );
 
         vertices.push_back(v);

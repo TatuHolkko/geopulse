@@ -8,6 +8,7 @@ Scene::Scene(
     MapperSuperParameters subOrbitAngleSuperParams,
     MapperSuperParameters superOrbitRadiusSuperParams,
     MapperSuperParameters subOrbitRadiusSuperParams,
+    ProviderType vertexProviderType,
     InputProvider &ip) : superOrbitAngleSuperset(superOrbitAngleSuperParams,
                                                  ip),
 
@@ -41,7 +42,8 @@ Scene::Scene(
             superOrbitAngleSuperset.generate(),
             subOrbitAngleSuperset.generate(),
             superOrbitRadiusSuperset.generate(),
-            subOrbitRadiusSuperset.generate()));
+            subOrbitRadiusSuperset.generate(),
+            vertexProviderType));
     }
 }
 
