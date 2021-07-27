@@ -20,6 +20,7 @@
  */
 typedef struct MapperSuperParameters
 {
+    MapperFunction function;
     MapperParameters base;
     MapperParameters baseDelta;
     MapperParameters deltaBase;
@@ -31,7 +32,6 @@ class DynamicSuperset
 {
 private:
     std::list<DynamicSet<T> *> superset;
-    MapperFunction fn;
     MapperSuperParameters params;
     InputProvider *ip;
     int n;
@@ -42,7 +42,6 @@ public:
     /**
      * @brief Construct a new DynamicSuperSet object
      * 
-     * @param fn Mapper function type
      * @param base Base parameters for the first DynamicSet
      * @param subdelta Changes to the subset parameters after each Dynamic creation
      * @param subdeltadelta Changes of the subdelta after each set creation
@@ -50,7 +49,6 @@ public:
      * @param ip Input provider
      */
     DynamicSuperset(
-        MapperFunction fn,
         MapperSuperParameters params,
         InputProvider &ip);
 

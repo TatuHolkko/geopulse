@@ -2,10 +2,8 @@
 
 template<typename T>
 DynamicSuperset<T>::DynamicSuperset(
-    MapperFunction fn,
     MapperSuperParameters params,
-    InputProvider &ip) : fn(fn),
-                         params(params),
+    InputProvider &ip) : params(params),
                          ip(&ip),
                          n(0)
 {
@@ -25,7 +23,7 @@ DynamicSet<T> &DynamicSuperset<T>::generate()
 {
     MapperParameters newBase = params.base + params.baseDelta * n;
     MapperParameters newDelta = params.deltaBase + params.deltaBaseDelta * n;
-    DynamicSet<T> *dynset = new DynamicSet<T>(fn, newBase, newDelta, *ip);
+    DynamicSet<T> *dynset = new DynamicSet<T>(params.function, newBase, newDelta, *ip);
 
     superset.push_back(dynset);
 

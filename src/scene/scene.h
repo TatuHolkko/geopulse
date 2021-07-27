@@ -16,8 +16,7 @@ class Scene
     DynamicSuperset<float> subOrbitRadiusSuperset;
 
 public:
-    Scene(MapperFunction fn,
-          MapperSuperParameters superOrbitAngleSuperParams,
+    Scene(MapperSuperParameters superOrbitAngleSuperParams,
           MapperSuperParameters subOrbitAngleSuperParams,
           MapperSuperParameters superOrbitRadiusSuperParams,
           MapperSuperParameters subOrbitRadiusSuperParams,

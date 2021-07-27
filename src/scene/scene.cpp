@@ -1,26 +1,23 @@
 #include "scene.h"
 #include <GL/glut.h>
 
+#define PI 3.14159f
+
 Scene::Scene(
-    MapperFunction fn,
     MapperSuperParameters superOrbitAngleSuperParams,
     MapperSuperParameters subOrbitAngleSuperParams,
     MapperSuperParameters superOrbitRadiusSuperParams,
     MapperSuperParameters subOrbitRadiusSuperParams,
-    InputProvider &ip) : superOrbitAngleSuperset(fn,
-                                                 superOrbitAngleSuperParams,
+    InputProvider &ip) : superOrbitAngleSuperset(superOrbitAngleSuperParams,
                                                  ip),
 
-                         subOrbitAngleSuperset(fn,
-                                               subOrbitAngleSuperParams,
+                         subOrbitAngleSuperset(subOrbitAngleSuperParams,
                                                ip),
 
-                         superOrbitRadiusSuperset(fn,
-                                                  superOrbitRadiusSuperParams,
+                         superOrbitRadiusSuperset(superOrbitRadiusSuperParams,
                                                   ip),
 
-                         subOrbitRadiusSuperset(fn,
-                                                subOrbitRadiusSuperParams,
+                         subOrbitRadiusSuperset(subOrbitRadiusSuperParams,
                                                 ip)
 
 {
@@ -29,9 +26,11 @@ Scene::Scene(
     //drawing color
     glColor3f(0.0f, 1.0f, 0.0f);
 
-    for (int i = 0; i < 3; i++)
+    int n_vertices = 6;
+
+    for (int i = 0; i < 6; i++)
     {
-        int n_vertices = 6;
+        
         shapes.push_back(Shape(
             n_vertices,
             superOrbitAngleSuperset.generate(),
