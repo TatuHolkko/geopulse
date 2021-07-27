@@ -33,24 +33,17 @@ class DynamicSuperset
 private:
     std::list<DynamicSet<T> *> superset;
     MapperSuperParameters params;
-    InputProvider *ip;
     int n;
 
 public:
     ~DynamicSuperset();
 
     /**
-     * @brief Construct a new DynamicSuperSet object
+     * @brief Construct a new DynamicSuperset object
      * 
-     * @param base Base parameters for the first DynamicSet
-     * @param subdelta Changes to the subset parameters after each Dynamic creation
-     * @param subdeltadelta Changes of the subdelta after each set creation
-     * @param superdelta Changes of the subset base after each set creation
-     * @param ip Input provider
+     * @param params super parameters
      */
-    DynamicSuperset(
-        MapperSuperParameters params,
-        InputProvider &ip);
+    DynamicSuperset(MapperSuperParameters params);
 
     /**
      * @brief Create a new DynamicSet and adjust parameters

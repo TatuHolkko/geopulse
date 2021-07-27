@@ -3,25 +3,31 @@
 
 #define PI 3.14159f
 
-Shape::Shape(
-    int n, 
-    DynamicSet<float>& superOrbitAngles,
-    DynamicSet<float>& subOrbitAngles,
-    DynamicSet<float>& superOrbitRadii,
-    DynamicSet<float>& subOrbitRadii,
-    ProviderType providerType)
+Shape::Shape(int n,
+             DynamicSet<float> &superOrbitAngles,
+             DynamicSet<float> &subOrbitAngles,
+             DynamicSet<float> &superOrbitRadii,
+             DynamicSet<float> &subOrbitRadii,
+             ProviderType providerType,
+             DynamicSet<float> &red,
+             DynamicSet<float> &green,
+             DynamicSet<float> &blue,
+             DynamicSet<float> &alpha,
+             Timer &t)
 {
 
     for (int i = 0; i < n; i++)
     {
         Vertex v = Vertex(
-            // (PI * 2 / n * i)
-            superOrbitAngles.generate(), 
-            subOrbitAngles.generate(), 
-            superOrbitRadii.generate(), 
-            subOrbitRadii.generate(),
-            providerType
-            );
+            superOrbitAngles.generate(t),
+            subOrbitAngles.generate(t),
+            superOrbitRadii.generate(t),
+            subOrbitRadii.generate(t),
+            providerType,
+            red.generate(t),
+            green.generate(t),
+            blue.generate(t),
+            alpha.generate(t));
 
         vertices.push_back(v);
     }
@@ -37,13 +43,19 @@ void Shape::draw()
 
     while (current != vertices.end())
     {
-        //start
-        std::pair<float, float> pos = previous->getPos();
-        glVertex3f(pos.first, pos.second, 0);
+        RGBA color1 = previous->getColor();
+        RGBA color2 = current->getColor();
+        RGBA colorResult = color1 * 0.5f + color2 * 0.5f;
+        
+        glColor3f(colorResult.R, colorResult.G, colorResult.B);
 
+        //start
+        std::pair<float, float> pos1 = previous->getPos();
         //end
-        pos = current->getPos();
-        glVertex3f(pos.first, pos.second, 0);
+        std::pair<float, float> pos2 = current->getPos();
+
+        glVertex3f(pos1.first, pos1.second, 0);
+        glVertex3f(pos2.first, pos2.second, 0);
 
         previous = current;
         current = next(current);

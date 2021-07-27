@@ -21,7 +21,6 @@ private:
     MapperFunction fn;
     MapperParameters base;
     MapperParameters delta;
-    InputProvider *ip;
     int n;
 
 public:
@@ -33,20 +32,18 @@ public:
      * @param fn Mapper function type
      * @param base Parameters for the first Dynamic
      * @param delta Parameter changes added after each generate call
-     * @param ip Input provider
      */
     DynamicSet(
         MapperFunction fn,
         MapperParameters base,
-        MapperParameters delta,
-        InputProvider &ip);
+        MapperParameters delta);
 
     /**
      * @brief Create a new Dynamic and adjust parameters
      * 
      * @return Dynamic&
      */
-    Dynamic<T> &generate();
+    Dynamic<T> &generate(InputProvider &ip);
 };
 
 #endif

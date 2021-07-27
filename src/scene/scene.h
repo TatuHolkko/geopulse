@@ -15,7 +15,19 @@ class Scene
     DynamicSuperset<float> superOrbitRadiusSuperset;
     DynamicSuperset<float> subOrbitRadiusSuperset;
 
+    DynamicSuperset<float> redSuperset;
+    DynamicSuperset<float> greenSuperset;
+    DynamicSuperset<float> blueSuperset;
+    DynamicSuperset<float> alphaSuperset;
+
 public:
+    /**
+     * @brief Construct a new Scene object
+     * 
+     
+     * @param timer
+     */
+
     /**
      * @brief Construct a new Scene object
      * 
@@ -24,14 +36,22 @@ public:
      * @param superOrbitRadiusSuperParams super orbit radius parameters
      * @param subOrbitRadiusSuperParams sub orbit radius parameters
      * @param veretxProviderType type of input provided by the vertices
-     * @param ip input provider for vertices
+     * @param redSuperParams red params
+     * @param greenSuperParams green params
+     * @param blueSuperParams blue params
+     * @param alphaSuperParams alpha params
+     * @param t 
      */
     Scene(MapperSuperParameters superOrbitAngleSuperParams, 
           MapperSuperParameters subOrbitAngleSuperParams,
           MapperSuperParameters superOrbitRadiusSuperParams,
           MapperSuperParameters subOrbitRadiusSuperParams,
           ProviderType veretxProviderType,
-          InputProvider &ip);
+          MapperSuperParameters redSuperParams, 
+          MapperSuperParameters greenSuperParams,
+          MapperSuperParameters blueSuperParams,
+          MapperSuperParameters alphaSuperParams,
+          Timer &t);
 
     void draw();
 };

@@ -25,13 +25,19 @@ public:
      * @param superOrbitRadii  Super orbit radius dynamics
      * @param subOrbitRadii    Sub orbit radius dynamics
      * @param providerType type of input provided by vertices
+     * @param t timer
      */
     Shape(int n,
           DynamicSet<float> &superOrbitAngles,
           DynamicSet<float> &subOrbitAngles,
           DynamicSet<float> &superOrbitRadii,
           DynamicSet<float> &subOrbitRadii,
-          ProviderType providerType);
+          ProviderType providerType,
+          DynamicSet<float> &red,
+          DynamicSet<float> &green,
+          DynamicSet<float> &blue,
+          DynamicSet<float> &alpha,
+          Timer &t);
 
     /**
      * @brief Draw the shape

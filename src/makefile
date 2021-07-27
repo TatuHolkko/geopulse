@@ -10,7 +10,7 @@ TARGET = geopulse
 VERBOSE = FALSE
 
 # Create the list of directories
-DIRS = dance scene dynamic
+DIRS = dance scene dynamic color
 SOURCEDIRS = $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
 TARGETDIRS = $(foreach dir, $(DIRS), $(addprefix $(BUILDDIR)/, $(dir)))
 

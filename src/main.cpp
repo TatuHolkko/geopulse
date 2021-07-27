@@ -35,10 +35,10 @@ int main(int argc, char *argv[])
 
 	MapperSuperParameters superAngle = {
 		Sine,
-		{0, 24, PI, 0},		 //base
-		{0, 2, 0, 0},		 //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}		 //deltaBaseDelta
+		{0, 24, PI, 0}, //base
+		{0, 2, 0, 0},	//baseDelta
+		{0, 0, 0, 0},	//deltaBase
+		{0, 0, 0, 0}	//deltaBaseDelta
 	};
 
 	MapperSuperParameters subAngle = {
@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
 
 	MapperSuperParameters superRadius = {
 		Sine,
-		{0, 1, 0, 0.5}, //base
-		{0, 0, 0.01, 0.1},	  //baseDelta
-		{0, 0, 0, 0},	  //deltaBase
-		{0, 0, 0, 0}	  //deltaBaseDelta
+		{0, 1, 0, 0.5},	   //base
+		{0, 0, 0.01, 0.1}, //baseDelta
+		{0, 0, 0, 0},	   //deltaBase
+		{0, 0, 0, 0}	   //deltaBaseDelta
 	};
 
 	MapperSuperParameters subRadius = {
@@ -65,11 +65,44 @@ int main(int argc, char *argv[])
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
 
+	MapperSuperParameters red = {
+		Sine,
+		{0, 1, 0, 1}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
+	MapperSuperParameters green = {
+		Sine,
+		{0, 1, 0, 0}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
+	MapperSuperParameters blue = {
+		Sine,
+		{0, 1, 0, 0}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
+	MapperSuperParameters alpha = {
+		Sine,
+		{0, 1, 0, 1}, //base
+		{0, 0, 0, 0}, //baseDelta
+		{0, 0, 0, 0}, //deltaBase
+		{0, 0, 0, 0}  //deltaBaseDelta
+	};
+
 	scene = new Scene(superAngle,
 					  subAngle,
 					  superRadius,
 					  subRadius,
 					  Radius,
+					  red,
+					  green,
+					  blue,
+					  alpha,
 					  *timer);
 
 	glutDisplayFunc(redraw);

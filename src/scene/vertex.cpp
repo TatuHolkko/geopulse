@@ -2,12 +2,21 @@
 #include "../dance/dance.h"
 #include <cmath>
 
-Vertex::Vertex(Dynamic<float> &a, Dynamic<float> &b, Dynamic<float> &r, Dynamic<float> &s, ProviderType providerType)
-{
-    this->a = &a;
-    this->b = &b;
-    this->r = &r;
-    this->s = &s;
+Vertex::Vertex(Dynamic<float> &superAngle,
+               Dynamic<float> &subAngle,
+               Dynamic<float> &superRadius,
+               Dynamic<float> &subRadius,
+               ProviderType providerType,
+               Dynamic<float> &red,
+               Dynamic<float> &green,
+               Dynamic<float> &blue,
+               Dynamic<float> &alpha) : color(red, green, blue, alpha)
+{                                         
+    this->a = &superAngle;
+    this->b = &subAngle;
+    this->r = &superRadius;
+    this->s = &subRadius;
+    this->providerType = providerType;
 }
 
 std::pair<float, float> Vertex::getPos()
@@ -19,9 +28,16 @@ std::pair<float, float> Vertex::getPos()
     return std::make_pair(x, y);
 }
 
-float Vertex::provideInput(){
-    if (providerType == Radius){
+RGBA Vertex::getColor()
+{
+    return color.get();
+}
+
+float Vertex::provideInput()
+{
+    if (providerType == Radius)
+    {
         return r->get();
     }
-    return a->get(); 
+    return a->get();
 }
