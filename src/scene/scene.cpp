@@ -1,7 +1,6 @@
 #include "scene.h"
+#include "../utility/utility.h"
 #include <GL/glut.h>
-
-#define PI 3.14159f
 
 Scene::Scene(MapperSuperParameters angleSuperParams,
              MapperSuperParameters radiusSuperParams,

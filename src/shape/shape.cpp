@@ -1,7 +1,7 @@
 #include "shape.h"
+#include "../utility/utility.h"
 #include <GL/glut.h>
 
-#define PI 3.14159f
 
 Shape::Shape(int n,
              DynamicSet<float> &angles,
@@ -42,12 +42,12 @@ void Shape::draw()
         glColor3f(colorResult.R, colorResult.G, colorResult.B);
 
         //start
-        std::pair<float, float> pos1 = previous->getPos();
+        Point pos1 = previous->getPos();
         //end
-        std::pair<float, float> pos2 = current->getPos();
+        Point pos2 = current->getPos();
 
-        glVertex3f(pos1.first, pos1.second, 0);
-        glVertex3f(pos2.first, pos2.second, 0);
+        glVertex3f(pos1.x, pos1.y, 0);
+        glVertex3f(pos2.x, pos2.y, 0);
 
         previous = current;
         current = next(current);

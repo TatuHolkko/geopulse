@@ -1,5 +1,6 @@
 #include "scene/scene.h"
 #include "dynamic/timer.h"
+#include "utility/utility.h"
 #include <GL/glut.h>
 
 Scene *scene;
@@ -9,8 +10,6 @@ Timer *timer;
 #define TICK_DURATION 16
 
 #define BPM 174
-
-#define PI 3.14159f
 
 void redraw()
 {

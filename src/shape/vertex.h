@@ -7,7 +7,7 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include <utility>
+#include "../utility/utility.h"
 #include "../dynamic/dynamic.h"
 #include "../dynamic/dynamicset.h"
 #include "../color/color.h"
@@ -37,9 +37,9 @@ public:
     /**
      * @brief Get cardinal coordinates
      * 
-     * @return std::pair<float,float> (x,y)
+     * @return Point (x,y)
      */
-    std::pair<float, float> getPos();
+    Point getPos();
 
     /**
      * @brief Get the Color of this vertex

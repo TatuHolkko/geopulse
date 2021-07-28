@@ -11,11 +11,11 @@ Vertex::Vertex(Dynamic<float> &angle,
 {
 }
 
-std::pair<float, float> Vertex::getPos()
+Point Vertex::getPos()
 {
     float x = sin(a->get()) * r->get();
     float y = cos(a->get()) * r->get();
-    return std::make_pair(x, y);
+    return {x, y};
 }
 
 RGB Vertex::getColor()
