@@ -24,19 +24,15 @@ class Vertex : public InputProvider
 {
     ProviderType providerType;
     Dynamic<float> *a;
-    Dynamic<float> *b;
     Dynamic<float> *r;
-    Dynamic<float> *s;
     Color color;
 
 public:
     /**
      * @brief Construct a new Vertex object
      * 
-     * @param superAngle super orbit angle
-     * @param subAngle sub orbit angle
-     * @param superRadius super orbit radius
-     * @param subRadius sub orbit radius
+     * @param angle angle
+     * @param radius radius
      * @param providerType type of input provided by this vertex
      * @param colorFunction function type for color
      * @param red red value
@@ -44,10 +40,8 @@ public:
      * @param blue blue value
      * @param alpha alpha value
      */
-    Vertex(Dynamic<float> &superAngle,
-           Dynamic<float> &subAngle,
-           Dynamic<float> &superRadius,
-           Dynamic<float> &subRadius,
+    Vertex(Dynamic<float> &angle,
+           Dynamic<float> &radius,
            ProviderType providerType,
            Dynamic<float> &red,
            Dynamic<float> &green,

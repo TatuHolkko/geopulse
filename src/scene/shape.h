@@ -20,18 +20,14 @@ public:
      * @brief Construct a new Shape object
      * 
      * @param n Number of vertices
-     * @param superOrbitAngles Super orbit angle dynamics
-     * @param subOrbitAngles   Sub orbit angle dynamics
-     * @param superOrbitRadii  Super orbit radius dynamics
-     * @param subOrbitRadii    Sub orbit radius dynamics
+     * @param angles angle dynamics
+     * @param radii radius dynamics
      * @param providerType type of input provided by vertices
      * @param t timer
      */
     Shape(int n,
-          DynamicSet<float> &superOrbitAngles,
-          DynamicSet<float> &subOrbitAngles,
-          DynamicSet<float> &superOrbitRadii,
-          DynamicSet<float> &subOrbitRadii,
+          DynamicSet<float> &angles,
+          DynamicSet<float> &radii,
           ProviderType providerType,
           DynamicSet<float> &red,
           DynamicSet<float> &green,

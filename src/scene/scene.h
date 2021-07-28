@@ -10,10 +10,8 @@ class Scene
 {
     float beat;
     std::list<Shape> shapes;
-    DynamicSuperset<float> superOrbitAngleSuperset;
-    DynamicSuperset<float> subOrbitAngleSuperset;
-    DynamicSuperset<float> superOrbitRadiusSuperset;
-    DynamicSuperset<float> subOrbitRadiusSuperset;
+    DynamicSuperset<float> angleSuperset;
+    DynamicSuperset<float> radiusSuperset;
 
     DynamicSuperset<float> redSuperset;
     DynamicSuperset<float> greenSuperset;
@@ -21,31 +19,21 @@ class Scene
     DynamicSuperset<float> alphaSuperset;
 
 public:
-    /**
-     * @brief Construct a new Scene object
-     * 
-     
-     * @param timer
-     */
 
     /**
      * @brief Construct a new Scene object
      * 
-     * @param superOrbitAngleSuperParams super orbit angle parameters
-     * @param subOrbitAngleSuperParams sub orbit angle parameters
-     * @param superOrbitRadiusSuperParams super orbit radius parameters
-     * @param subOrbitRadiusSuperParams sub orbit radius parameters
+     * @param anglengleSuperParams angle dynamics parameters
+     * @param radiusSuperParams radius dynamics parameters
      * @param veretxProviderType type of input provided by the vertices
-     * @param redSuperParams red params
-     * @param greenSuperParams green params
-     * @param blueSuperParams blue params
-     * @param alphaSuperParams alpha params
+     * @param redSuperParams red dynamics params
+     * @param greenSuperParams green dynamics params
+     * @param blueSuperParams blue dynamics params
+     * @param alphaSuperParams alpha dynamics params
      * @param t 
      */
-    Scene(MapperSuperParameters superOrbitAngleSuperParams, 
-          MapperSuperParameters subOrbitAngleSuperParams,
-          MapperSuperParameters superOrbitRadiusSuperParams,
-          MapperSuperParameters subOrbitRadiusSuperParams,
+    Scene(MapperSuperParameters anglengleSuperParams, 
+          MapperSuperParameters radiusSuperParams,
           ProviderType veretxProviderType,
           MapperSuperParameters redSuperParams, 
           MapperSuperParameters greenSuperParams,

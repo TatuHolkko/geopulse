@@ -4,10 +4,8 @@
 #define PI 3.14159f
 
 Shape::Shape(int n,
-             DynamicSet<float> &superOrbitAngles,
-             DynamicSet<float> &subOrbitAngles,
-             DynamicSet<float> &superOrbitRadii,
-             DynamicSet<float> &subOrbitRadii,
+             DynamicSet<float> &angles,
+             DynamicSet<float> &radii,
              ProviderType providerType,
              DynamicSet<float> &red,
              DynamicSet<float> &green,
@@ -19,10 +17,8 @@ Shape::Shape(int n,
     for (int i = 0; i < n; i++)
     {
         Vertex v = Vertex(
-            superOrbitAngles.generate(t),
-            subOrbitAngles.generate(t),
-            superOrbitRadii.generate(t),
-            subOrbitRadii.generate(t),
+            angles.generate(t),
+            radii.generate(t),
             providerType,
             red.generate(t),
             green.generate(t),
@@ -46,7 +42,7 @@ void Shape::draw()
         RGBA color1 = previous->getColor();
         RGBA color2 = current->getColor();
         RGBA colorResult = color1 * 0.5f + color2 * 0.5f;
-        
+
         glColor3f(colorResult.R, colorResult.G, colorResult.B);
 
         //start

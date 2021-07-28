@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("GeoPulse");
 
-	MapperSuperParameters superAngle = {
+	MapperSuperParameters angle = {
 		Sine,
 		{0, 24, PI, 0}, //base
 		{0, 2, 0, 0},	//baseDelta
@@ -41,15 +41,7 @@ int main(int argc, char *argv[])
 		{0, 0, 0, 0}	//deltaBaseDelta
 	};
 
-	MapperSuperParameters subAngle = {
-		Sine,
-		{0, 1, 0, 0}, //base
-		{0, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
-
-	MapperSuperParameters superRadius = {
+	MapperSuperParameters radius = {
 		Sine,
 		{0, 1, 0, 0.5},	   //base
 		{0, 0, 0.01, 0.1}, //baseDelta
@@ -57,25 +49,17 @@ int main(int argc, char *argv[])
 		{0, 0, 0, 0}	   //deltaBaseDelta
 	};
 
-	MapperSuperParameters subRadius = {
-		Sine,
-		{0, 1, 0, 0}, //base
-		{0, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
-
 	MapperSuperParameters red = {
 		Sine,
-		{0, 1, 0, 1}, //base
+		{0, 4, 0.7, 0}, //base
 		{0, 0, 0, 0}, //baseDelta
 		{0, 0, 0, 0}, //deltaBase
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
 	MapperSuperParameters green = {
 		Sine,
-		{0, 1, 0, 0}, //base
-		{0, 0, 0, 0}, //baseDelta
+		{0, 2, 0.7, 0}, //base
+		{1, 0, 0, 0}, //baseDelta
 		{0, 0, 0, 0}, //deltaBase
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
@@ -94,10 +78,8 @@ int main(int argc, char *argv[])
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
 
-	scene = new Scene(superAngle,
-					  subAngle,
-					  superRadius,
-					  subRadius,
+	scene = new Scene(angle,
+					  radius,
 					  Radius,
 					  red,
 					  green,
