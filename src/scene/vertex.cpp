@@ -5,10 +5,9 @@ Vertex::Vertex(Dynamic<float> &angle,
                Dynamic<float> &radius,
                Dynamic<float> &red,
                Dynamic<float> &green,
-               Dynamic<float> &blue,
-               Dynamic<float> &alpha) : a(&angle),
+               Dynamic<float> &blue) : a(&angle),
                                         r(&radius),
-                                        color(red, green, blue, alpha)
+                                        color(red, green, blue)
 {
 }
 
@@ -19,7 +18,7 @@ std::pair<float, float> Vertex::getPos()
     return std::make_pair(x, y);
 }
 
-RGBA Vertex::getColor()
+RGB Vertex::getColor()
 {
     return color.get();
 }

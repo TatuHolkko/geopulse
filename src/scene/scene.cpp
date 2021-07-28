@@ -8,13 +8,11 @@ Scene::Scene(MapperSuperParameters angleSuperParams,
              MapperSuperParameters redSuperParams,
              MapperSuperParameters greenSuperParams,
              MapperSuperParameters blueSuperParams,
-             MapperSuperParameters alphaSuperParams,
              Timer &t) : angleSuperset(angleSuperParams),
                          radiusSuperset(radiusSuperParams),
                          redSuperset(redSuperParams),
                          greenSuperset(greenSuperParams),
-                         blueSuperset(blueSuperParams),
-                         alphaSuperset(alphaSuperParams)
+                         blueSuperset(blueSuperParams)
 
 {
     //background
@@ -37,7 +35,6 @@ Scene::Scene(MapperSuperParameters angleSuperParams,
             redSuperset.generate(),
             greenSuperset.generate(),
             blueSuperset.generate(),
-            alphaSuperset.generate(),
             t));
     }
 }

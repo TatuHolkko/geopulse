@@ -16,7 +16,6 @@ class Scene
     DynamicSuperset<float> redSuperset;
     DynamicSuperset<float> greenSuperset;
     DynamicSuperset<float> blueSuperset;
-    DynamicSuperset<float> alphaSuperset;
 
 public:
 
@@ -28,7 +27,6 @@ public:
      * @param redSuperParams red dynamics params
      * @param greenSuperParams green dynamics params
      * @param blueSuperParams blue dynamics params
-     * @param alphaSuperParams alpha dynamics params
      * @param t 
      */
     Scene(MapperSuperParameters anglengleSuperParams, 
@@ -36,7 +34,6 @@ public:
           MapperSuperParameters redSuperParams, 
           MapperSuperParameters greenSuperParams,
           MapperSuperParameters blueSuperParams,
-          MapperSuperParameters alphaSuperParams,
           Timer &t);
 
     void draw();

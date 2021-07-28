@@ -9,7 +9,6 @@ Shape::Shape(int n,
              DynamicSet<float> &red,
              DynamicSet<float> &green,
              DynamicSet<float> &blue,
-             DynamicSet<float> &alpha,
              Timer &t)
 {
 
@@ -20,8 +19,7 @@ Shape::Shape(int n,
             radii.generate(t),
             red.generate(t),
             green.generate(t),
-            blue.generate(t),
-            alpha.generate(t));
+            blue.generate(t));
 
         vertices.push_back(v);
     }
@@ -37,9 +35,9 @@ void Shape::draw()
 
     while (current != vertices.end())
     {
-        RGBA color1 = previous->getColor();
-        RGBA color2 = current->getColor();
-        RGBA colorResult = color1 * 0.5f + color2 * 0.5f;
+        RGB color1 = previous->getColor();
+        RGB color2 = current->getColor();
+        RGB colorResult = color1 * 0.5f + color2 * 0.5f;
 
         glColor3f(colorResult.R, colorResult.G, colorResult.B);
 

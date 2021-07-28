@@ -27,14 +27,12 @@ public:
      * @param red red value
      * @param green green value
      * @param blue blue value
-     * @param alpha alpha value
      */
     Vertex(Dynamic<float> &angle,
            Dynamic<float> &radius,
            Dynamic<float> &red,
            Dynamic<float> &green,
-           Dynamic<float> &blue,
-           Dynamic<float> &alpha);
+           Dynamic<float> &blue);
 
     /**
      * @brief Get cardinal coordinates
@@ -46,9 +44,9 @@ public:
     /**
      * @brief Get the Color of this vertex
      * 
-     * @return RGBA 
+     * @return RGB
      */
-    RGBA getColor();
+    RGB getColor();
 };
 
 #endif

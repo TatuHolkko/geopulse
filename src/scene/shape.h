@@ -23,6 +23,9 @@ public:
      * @param n Number of vertices
      * @param angles angle dynamics
      * @param radii radius dynamics
+     * @param red red dynamics
+     * @param green green dynamics
+     * @param blue blue dynamics
      * @param t timer
      */
     Shape(int n,
@@ -31,7 +34,6 @@ public:
           DynamicSet<float> &red,
           DynamicSet<float> &green,
           DynamicSet<float> &blue,
-          DynamicSet<float> &alpha,
           Timer &t);
 
     /**

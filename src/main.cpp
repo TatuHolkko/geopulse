@@ -70,20 +70,12 @@ int main(int argc, char *argv[])
 		{0, 0, 0, 0}, //deltaBase
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
-	MapperSuperParameters alpha = {
-		Sine,
-		{0, 1, 0, 1}, //base
-		{0, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
 
 	scene = new Scene(angle,
 					  radius,
 					  red,
 					  green,
 					  blue,
-					  alpha,
 					  *timer);
 
 	glutDisplayFunc(redraw);
