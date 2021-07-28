@@ -7,6 +7,7 @@
 #define SHAPE_H
 
 #include "vertex.h"
+#include "../dance/timer.h"
 #include "../dynamic/dynamicset.h"
 #include <list>
 
@@ -22,13 +23,11 @@ public:
      * @param n Number of vertices
      * @param angles angle dynamics
      * @param radii radius dynamics
-     * @param providerType type of input provided by vertices
      * @param t timer
      */
     Shape(int n,
           DynamicSet<float> &angles,
           DynamicSet<float> &radii,
-          ProviderType providerType,
           DynamicSet<float> &red,
           DynamicSet<float> &green,
           DynamicSet<float> &blue,

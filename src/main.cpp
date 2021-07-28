@@ -8,7 +8,7 @@ Timer *timer;
 // tick duration in ms
 #define TICK_DURATION 16
 
-#define BPM 175
+#define BPM 174
 
 #define PI 3.14159f
 
@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
 
 	scene = new Scene(angle,
 					  radius,
-					  Radius,
 					  red,
 					  green,
 					  blue,

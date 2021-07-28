@@ -8,21 +8,12 @@
 #define VERTEX_H
 
 #include <utility>
-#include "../dance/timer.h"
 #include "../dynamic/dynamic.h"
 #include "../dynamic/dynamicset.h"
 #include "../color/color.h"
 
-// if used as an input provider, what property to return
-enum ProviderType
+class Vertex
 {
-    Radius,
-    Angle
-};
-
-class Vertex : public InputProvider
-{
-    ProviderType providerType;
     Dynamic<float> *a;
     Dynamic<float> *r;
     Color color;
@@ -33,8 +24,6 @@ public:
      * 
      * @param angle angle
      * @param radius radius
-     * @param providerType type of input provided by this vertex
-     * @param colorFunction function type for color
      * @param red red value
      * @param green green value
      * @param blue blue value
@@ -42,7 +31,6 @@ public:
      */
     Vertex(Dynamic<float> &angle,
            Dynamic<float> &radius,
-           ProviderType providerType,
            Dynamic<float> &red,
            Dynamic<float> &green,
            Dynamic<float> &blue,
@@ -61,13 +49,6 @@ public:
      * @return RGBA 
      */
     RGBA getColor();
-
-    /**
-     * @brief Return value dictated by providerType
-     * 
-     * @return float 
-     */
-    float provideInput();
 };
 
 #endif

@@ -25,7 +25,6 @@ public:
      * 
      * @param anglengleSuperParams angle dynamics parameters
      * @param radiusSuperParams radius dynamics parameters
-     * @param veretxProviderType type of input provided by the vertices
      * @param redSuperParams red dynamics params
      * @param greenSuperParams green dynamics params
      * @param blueSuperParams blue dynamics params
@@ -34,7 +33,6 @@ public:
      */
     Scene(MapperSuperParameters anglengleSuperParams, 
           MapperSuperParameters radiusSuperParams,
-          ProviderType veretxProviderType,
           MapperSuperParameters redSuperParams, 
           MapperSuperParameters greenSuperParams,
           MapperSuperParameters blueSuperParams,
