@@ -9,7 +9,8 @@
 
 enum MapperFunction
 {
-    Sine
+    Sine,
+    HalfSine
 };
 
 /**
@@ -43,6 +44,7 @@ private:
     MapperFunction function;
     MapperParameters params;
     float sine(float input);
+    float halfSine(float input);
 
 public:
     /**

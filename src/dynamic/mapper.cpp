@@ -1,7 +1,6 @@
 #include "mapper.h"
+#include "../utility/utility.h"
 #include <cmath>
-
-const float pi = 3.14159f;
 
 Mapper::Mapper()
 {
@@ -15,14 +14,19 @@ Mapper::Mapper(MapperFunction fn, MapperParameters params)
     this->params = params;
 }
 
-float Mapper::sine(float input)
-{
-    return params.offset + params.amp * sin((input + params.phase) / params.period * 2 * pi);
-}
-
 float Mapper::getValue(float input)
 {
-    return sine(input);
+    switch (this->function)
+    {
+    case HalfSine:
+        return halfSine(input);
+        break;
+    
+    case Sine:
+        return sine(input);
+        break;
+    }
+    throw "Logic error";
 }
 
 MapperParameters operator+(
@@ -47,4 +51,15 @@ MapperParameters operator*(
     result.amp    = a.amp    * n;
     result.offset = a.offset * n;
     return result;
+}
+
+float Mapper::sine(float input)
+{
+    return params.offset + params.amp * sin((input + params.phase) / params.period * 2 * PI);
+}
+
+float Mapper::halfSine(float input)
+{
+    float remainder = fmod(input + params.phase, params.period / 2);
+    return params.offset + params.amp * sin((remainder/params.period) * 2 * PI - PI / 2);
 }

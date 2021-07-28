@@ -33,31 +33,31 @@ int main(int argc, char *argv[])
 	glutCreateWindow("GeoPulse");
 
 	MapperSuperParameters angle = {
-		Sine,
-		{0, 24, PI, 0}, //base
-		{0, 2, 0, 0},	//baseDelta
+		HalfSine,
+		{0, 12, PI / 6, 0}, //base
+		{1, 0, 0, 0},	//baseDelta
 		{0, 0, 0, 0},	//deltaBase
 		{0, 0, 0, 0}	//deltaBaseDelta
 	};
 
 	MapperSuperParameters radius = {
 		Sine,
-		{0, 1, 0, 0.5},	   //base
-		{0, 0, 0.01, 0.1}, //baseDelta
+		{0, 1, 0, 0.2},	   //base
+		{0, 0, 0, 0.2}, //baseDelta
 		{0, 0, 0, 0},	   //deltaBase
 		{0, 0, 0, 0}	   //deltaBaseDelta
 	};
 
 	MapperSuperParameters red = {
 		Sine,
-		{0, 4, 0.7, 0}, //base
+		{0, 16, 0.5, 0.5}, //base
 		{0, 0, 0, 0}, //baseDelta
 		{0, 0, 0, 0}, //deltaBase
 		{0, 0, 0, 0}  //deltaBaseDelta
 	};
 	MapperSuperParameters green = {
 		Sine,
-		{0, 2, 0.7, 0}, //base
+		{0, 8, 0.5, 0.5}, //base
 		{1, 0, 0, 0}, //baseDelta
 		{0, 0, 0, 0}, //deltaBase
 		{0, 0, 0, 0}  //deltaBaseDelta
