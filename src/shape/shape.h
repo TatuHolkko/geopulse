@@ -7,7 +7,7 @@
 #define SHAPE_H
 
 #include "vertex.h"
-#include "../dance/timer.h"
+#include "../dynamic/timer.h"
 #include "../dynamic/dynamicset.h"
 #include <list>
 

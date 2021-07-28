@@ -1,5 +1,5 @@
 #include "scene/scene.h"
-#include "dance/timer.h"
+#include "dynamic/timer.h"
 #include <GL/glut.h>
 
 Scene *scene;

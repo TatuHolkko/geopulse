@@ -1,5 +1,5 @@
 /**
- * @file Dynamicset.h
+ * @file dynamicset.h
  * @brief DynamicSet is a collection of Dynamic objects that act
  *        similarly.
  */
@@ -9,7 +9,7 @@
 
 #include "dynamic.h"
 #include "inputprovider.h"
-#include "../dance/mapper.h"
+#include "mapper.h"
 
 #include <list>
 

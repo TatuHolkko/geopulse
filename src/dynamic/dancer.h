@@ -12,8 +12,8 @@
 #define DANCE_H
 
 #include "mapper.h"
-#include "../dynamic/dynamic.h"
-#include "../dynamic/inputprovider.h"
+#include "dynamic.h"
+#include "inputprovider.h"
 
 template<typename T>
 class Dancer : public Dynamic<T>

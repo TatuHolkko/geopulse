@@ -1,4 +1,4 @@
-#include "dance.h"
+#include "dancer.h"
 
 template<typename T>
 Dancer<T>::Dancer()

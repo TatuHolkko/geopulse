@@ -1,4 +1,4 @@
-#include "shape.h"
+#include "../shape/shape.h"
 #include "../dynamic/dynamicsuperset.h"
 #include "../dynamic/inputprovider.h"
 #include <list>

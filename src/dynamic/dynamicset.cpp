@@ -1,5 +1,5 @@
 #include "dynamicset.h"
-#include "../dance/dance.h"
+#include "dancer.h"
 
 template <typename T>
 DynamicSet<T>::~DynamicSet()
