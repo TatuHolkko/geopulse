@@ -1,6 +1,7 @@
 #include "scene/scene.h"
 #include "dynamic/timer.h"
 #include "utility/utility.h"
+#include "filehandler/filehandler.h"
 #include <GL/glut.h>
 
 Scene *scene;
@@ -25,6 +26,11 @@ void tick(int value)
 
 int main(int argc, char *argv[])
 {
+	std::string path = std::string("perf.txt");
+	read(path);
+	
+	return 0;
+
 	timer = new Timer(TICK_DURATION, BPM);
 
 	glutInit(&argc, argv);
@@ -34,8 +40,8 @@ int main(int argc, char *argv[])
 
 	MapperSuperParameters angle = {
 		HalfSine,
-		{0, 12, PI / 6, 0}, //base
-		{1, 0, 0, 0},	//baseDelta
+		{0, 12, PI, 0}, //base
+		{4, 0, 0, 0},	//baseDelta
 		{0, 0, 0, 0},	//deltaBase
 		{0, 0, 0, 0}	//deltaBaseDelta
 	};
