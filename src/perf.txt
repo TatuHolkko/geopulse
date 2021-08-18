@@ -3,11 +3,11 @@ scene
     duration: 16;
     shapes
     {
-        amount 6;
+        amount: 6;
         vertices: 6;
         radius
         {
-            function: SINE;
+            function: sine;
             
             phase
             {
@@ -41,11 +41,12 @@ scene
 
         angle
         {
-            function: CONSTANT;
+            function: sine;
 
-            offset(1)
+            offset
             {
-                dShape: 1;
+                base: 0;
+                dShape: 0;
                 dVertex: 0;
                 ddVertex: 0;
             }

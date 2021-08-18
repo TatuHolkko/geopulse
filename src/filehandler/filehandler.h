@@ -28,8 +28,8 @@ typedef struct ShapeGroup {
 } ShapeGroup;
 
 typedef struct Phrase {
-    std::list<ShapeGroup> groups;
     int duration;
+    std::list<ShapeGroup> groups;
 } Phrase;
 
 typedef struct Performance
@@ -38,6 +38,6 @@ typedef struct Performance
     std::list<Phrase> phrases;
 } Performance;
 
-void read(const std::string& filepath);
+Performance read(const std::string& filepath);
 
 #endif
