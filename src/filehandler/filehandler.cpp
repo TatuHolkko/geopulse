@@ -224,6 +224,30 @@ ShapeGroup createGroup(str_cit start, str_cit end)
                         .radius = {
                             .type = Sine,
                             .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .offset = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                        },
+                        .red = {
+                            .type = Sine,
+                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                        },
+                        .green = {
+                            .type = Sine,
+                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                        },
+                        .blue = {
+                            .type = Sine,
+                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
+                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
                         }};
 
     str_cit current = start;
@@ -245,6 +269,18 @@ ShapeGroup createGroup(str_cit start, str_cit end)
         else if (sect.name == "radius")
         {
             configureFunction(group.radius, sect.content.start, sect.content.end);
+        }
+        else if (sect.name == "red")
+        {
+            configureFunction(group.red, sect.content.start, sect.content.end);
+        }
+        else if (sect.name == "green")
+        {
+            configureFunction(group.green, sect.content.start, sect.content.end);
+        }
+        else if (sect.name == "blue")
+        {
+            configureFunction(group.blue, sect.content.start, sect.content.end);
         }
         else
         {

@@ -25,6 +25,9 @@ typedef struct ShapeGroup {
     int amount;
     Function angle;
     Function radius;
+    Function red;
+    Function green;
+    Function blue;
 } ShapeGroup;
 
 typedef struct Phrase {
