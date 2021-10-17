@@ -2,6 +2,8 @@
 #include "dynamic/timer.h"
 #include "utility/utility.h"
 #include "filehandler/filehandler.h"
+
+#include <iostream>
 #include <GL/glut.h>
 
 Scene *scene;
@@ -29,7 +31,15 @@ int main(int argc, char *argv[])
 	std::string path = std::string("perf.txt");
 
 	conf::Performance perf;
-	read(perf, path);
+	try
+	{
+		read(perf, path);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return 1;
+	}
 
 	timer = new Timer(TICK_DURATION, BPM);
 

@@ -4,6 +4,16 @@
 #define PI 3.1415926535f
 
 #include <list>
+#include <string>
+
+typedef std::string str;
+typedef str::const_iterator str_cit;
+
+typedef struct StrRange
+{
+    str_cit start;
+    str_cit end;
+} StrRange;
 
 typedef struct Point
 {

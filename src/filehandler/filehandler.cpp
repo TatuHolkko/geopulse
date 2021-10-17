@@ -1,17 +1,15 @@
 #include "filehandler.h"
+#include "utility.h"
+#include "logger.h"
 
 #include <fstream>
 #include <algorithm>
-#include <sstream>
+#include <exception>
 
-typedef std::string str;
-typedef str::const_iterator str_cit;
-
-typedef struct StrRange
+const char* ParsingException::what() const throw()
 {
-    str_cit start;
-    str_cit end;
-} StrRange;
+    return "Failed to parse performance file.";
+}
 
 typedef struct Section
 {
@@ -35,6 +33,8 @@ typedef struct Function
     Deviator amplitude;
     Deviator offset;
 } Function;
+
+static Logger* logger;
 
 const conf::Cluster defaultCluster = {.vertices = 6,
                                       .amount = 1,
@@ -124,7 +124,8 @@ str_cit matchingBracket(str_cit start, str_cit end)
         }
         current++;
     }
-    throw "No matching bracket found";
+    logger->errorPoint(start, "No closing bracket found.");
+    throw ParsingException();
 }
 
 Section getNextSection(str_cit start, str_cit end)
@@ -132,7 +133,8 @@ Section getNextSection(str_cit start, str_cit end)
     str_cit blockStart = findFirst(start, end, {':', '{'});
     if (blockStart == end)
     {
-        throw "Invalid section";
+        logger->errorPoint(start, "Expected section declaration.");
+        throw ParsingException();
     }
 
     str_cit blockEnd;
@@ -145,7 +147,8 @@ Section getNextSection(str_cit start, str_cit end)
         blockEnd = findFirst(blockStart, end, {';'});
         if (blockEnd == end)
         {
-            throw "Missing ;";
+            logger->errorPoint(start, "Section block not closed with a semicolon.");
+            throw ParsingException();
         }
     }
 
@@ -164,7 +167,17 @@ float evaluate(str_cit start, str_cit end)
         buffer.push_back(*current);
         current++;
     }
-    return std::stof(buffer);
+
+    try
+    {
+        return std::stof(buffer);
+    }
+    catch(const std::invalid_argument& e)
+    {
+        logger->errorRange({start, end}, "Can not evaluate block into a numerical value.");
+        throw ParsingException();
+    }
+    
 }
 
 void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
@@ -192,7 +205,8 @@ void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
         }
         else
         {
-            throw "Invalid Deviator property";
+            logger->errorRange(sect.name, "Invalid Deviator property name.");
+            throw ParsingException();
         }
 
         current = next(sect.content.end);
@@ -235,12 +249,14 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
             }
             else
             {
-                throw "Invalid function type";
+                logger->errorRange(sect.content, "Invalid function type.");
+                throw ParsingException();
             }
         }
         else
         {
-            throw "Invalid function configuration";
+            logger->errorRange(sect.name, "Invalid function property name.");
+            throw ParsingException();
         }
 
         current = next(sect.content.end);
@@ -320,7 +336,8 @@ void configureCluster(conf::Cluster &cluster, str_cit start, str_cit end)
         }
         else
         {
-            throw "Invalid Cluster property";
+            logger->errorRange(sect.name, "Invalid Cluster property name.");
+            throw ParsingException();
         }
 
         current = next(sect.content.end);
@@ -347,7 +364,8 @@ void configurePhrase(conf::Phrase &phrase, str_cit start, str_cit end)
         }
         else
         {
-            throw "Invalid scene configuration";
+            logger->errorRange(sect.name, "Invalid Phrase property name.");
+            throw ParsingException();
         }
 
         current = next(sect.content.end);
@@ -376,7 +394,8 @@ void configurePerformance(conf::Performance &performance, str &text)
         }
         else
         {
-            throw "Invalid scene configuration";
+            logger->errorRange(sect.name, "Invalid Performance property name.");
+            throw ParsingException();
         }
 
         current = next(sect.content.end);
@@ -387,12 +406,17 @@ void read(conf::Performance &performance, const str &filepath)
 {
     std::ifstream ifs(filepath);
 
-    str content((std::istreambuf_iterator<char>(ifs)),
+    str original_content((std::istreambuf_iterator<char>(ifs)),
                 (std::istreambuf_iterator<char>()));
+    str stripped_content(original_content);
 
-    strip(content);
+    strip(stripped_content);
 
     performance = defaultPerformance;
+
+    Logger _logger(original_content, stripped_content);
     
-    configurePerformance(performance, content);
+    logger = &_logger;
+
+    configurePerformance(performance, stripped_content);
 }
