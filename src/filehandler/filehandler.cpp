@@ -19,6 +19,43 @@ typedef struct Section
     StrRange content;
 } Section;
 
+typedef struct Deviator
+{
+    float base = 0;
+    float dShape = 0;
+    float dVertex = 0;
+    float ddVertex = 0;
+} Deviator;
+
+typedef struct Function
+{
+    FunctionType type = Sine;
+    Deviator phase;
+    Deviator period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0};
+    Deviator amplitude;
+    Deviator offset;
+} Function;
+
+const conf::Cluster defaultCluster = {.vertices = 6,
+                                      .amount = 1,
+                                      .angle = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+
+                                      .radius = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0.5}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0.1}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+
+                                      .red = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+
+                                      .green = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+
+                                      .blue = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}}};
+
+const conf::Phrase defaultPhrase = {
+    .duration = 16,
+    .clusters = {}};
+
+const conf::Performance defaultPerformance = {
+    .bpm = 120,
+    .phrases = {}};
+
 bool operator==(const StrRange &lhs, const str &rhs)
 {
 
@@ -130,7 +167,7 @@ float evaluate(str_cit start, str_cit end)
     return std::stof(buffer);
 }
 
-void configureProperty(FunctionProperty &property, str_cit confStart, str_cit confEnd)
+void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
 {
     str_cit current = confStart;
     while (current < confEnd)
@@ -139,23 +176,23 @@ void configureProperty(FunctionProperty &property, str_cit confStart, str_cit co
 
         if (sect.name == "base")
         {
-            property.base = evaluate(sect.content.start, sect.content.end);
+            deviator.base = evaluate(sect.content.start, sect.content.end);
         }
         else if (sect.name == "dShape")
         {
-            property.dShape = evaluate(sect.content.start, sect.content.end);
+            deviator.dShape = evaluate(sect.content.start, sect.content.end);
         }
         else if (sect.name == "dVertex")
         {
-            property.dVertex = evaluate(sect.content.start, sect.content.end);
+            deviator.dVertex = evaluate(sect.content.start, sect.content.end);
         }
         else if (sect.name == "ddVertex")
         {
-            property.ddVertex = evaluate(sect.content.start, sect.content.end);
+            deviator.ddVertex = evaluate(sect.content.start, sect.content.end);
         }
         else
         {
-            throw "Invalid function property configuration";
+            throw "Invalid Deviator property";
         }
 
         current = next(sect.content.end);
@@ -172,19 +209,19 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
 
         if (sect.name == "phase")
         {
-            configureProperty(function.phase, sect.content.start, sect.content.end);
+            configureDeviator(function.phase, sect.content.start, sect.content.end);
         }
         else if (sect.name == "period")
         {
-            configureProperty(function.period, sect.content.start, sect.content.end);
+            configureDeviator(function.period, sect.content.start, sect.content.end);
         }
         else if (sect.name == "amplitude")
         {
-            configureProperty(function.amplitude, sect.content.start, sect.content.end);
+            configureDeviator(function.amplitude, sect.content.start, sect.content.end);
         }
         else if (sect.name == "offset")
         {
-            configureProperty(function.offset, sect.content.start, sect.content.end);
+            configureDeviator(function.offset, sect.content.start, sect.content.end);
         }
         else if (sect.name == "function")
         {
@@ -210,45 +247,33 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
     }
 }
 
-ShapeGroup createGroup(str_cit start, str_cit end)
+void convertToInternalConf(conf::DeviatorSequenceSequence &internalConf, Function &fileConf)
 {
-    ShapeGroup group = {.vertices = 6,
-                        .amount = 1,
-                        .angle = {
-                            .type = Sine,
-                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .offset = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                        },
-                        .radius = {
-                            .type = Sine,
-                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .offset = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                        },
-                        .red = {
-                            .type = Sine,
-                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                        },
-                        .green = {
-                            .type = Sine,
-                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                        },
-                        .blue = {
-                            .type = Sine,
-                            .phase = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .amplitude = {.base = 0, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                            .offset = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0},
-                        }};
+    internalConf.type = fileConf.type;
+
+    internalConf.paramSequenceSequence.base.base.phase = fileConf.phase.base;
+    internalConf.paramSequenceSequence.base.delta.phase = fileConf.phase.dVertex;
+    internalConf.paramSequenceSequence.delta.base.phase = fileConf.phase.dShape;
+    internalConf.paramSequenceSequence.delta.delta.phase = fileConf.phase.ddVertex;
+
+    internalConf.paramSequenceSequence.base.base.period = fileConf.period.base;
+    internalConf.paramSequenceSequence.base.delta.period = fileConf.period.dVertex;
+    internalConf.paramSequenceSequence.delta.base.period = fileConf.period.dShape;
+    internalConf.paramSequenceSequence.delta.delta.period = fileConf.period.ddVertex;
+
+    internalConf.paramSequenceSequence.base.base.amp = fileConf.amplitude.base;
+    internalConf.paramSequenceSequence.base.delta.amp = fileConf.amplitude.dVertex;
+    internalConf.paramSequenceSequence.delta.base.amp = fileConf.amplitude.dShape;
+    internalConf.paramSequenceSequence.delta.delta.amp = fileConf.amplitude.ddVertex;
+
+    internalConf.paramSequenceSequence.base.base.offset = fileConf.offset.base;
+    internalConf.paramSequenceSequence.base.delta.offset = fileConf.offset.dVertex;
+    internalConf.paramSequenceSequence.delta.base.offset = fileConf.offset.dShape;
+    internalConf.paramSequenceSequence.delta.delta.offset = fileConf.offset.ddVertex;
+}
+
+void configureCluster(conf::Cluster &cluster, str_cit start, str_cit end)
+{
 
     str_cit current = start;
     while (current < end)
@@ -257,47 +282,53 @@ ShapeGroup createGroup(str_cit start, str_cit end)
 
         if (sect.name == "amount")
         {
-            group.amount = evaluate(sect.content.start, sect.content.end);
-        } else if (sect.name == "vertices")
+            cluster.amount = evaluate(sect.content.start, sect.content.end);
+        }
+        else if (sect.name == "vertices")
         {
-            group.vertices = evaluate(sect.content.start, sect.content.end);
+            cluster.vertices = evaluate(sect.content.start, sect.content.end);
         }
         else if (sect.name == "angle")
         {
-            configureFunction(group.angle, sect.content.start, sect.content.end);
+            Function f;
+            configureFunction(f, sect.content.start, sect.content.end);
+            convertToInternalConf(cluster.angle, f);
         }
         else if (sect.name == "radius")
         {
-            configureFunction(group.radius, sect.content.start, sect.content.end);
+            Function f;
+            configureFunction(f, sect.content.start, sect.content.end);
+            convertToInternalConf(cluster.radius, f);
         }
         else if (sect.name == "red")
         {
-            configureFunction(group.red, sect.content.start, sect.content.end);
+            Function f;
+            configureFunction(f, sect.content.start, sect.content.end);
+            convertToInternalConf(cluster.red, f);
         }
         else if (sect.name == "green")
         {
-            configureFunction(group.green, sect.content.start, sect.content.end);
+            Function f;
+            configureFunction(f, sect.content.start, sect.content.end);
+            convertToInternalConf(cluster.green, f);
         }
         else if (sect.name == "blue")
         {
-            configureFunction(group.blue, sect.content.start, sect.content.end);
+            Function f;
+            configureFunction(f, sect.content.start, sect.content.end);
+            convertToInternalConf(cluster.blue, f);
         }
         else
         {
-            throw "Invalid shape group configuration";
+            throw "Invalid Cluster property";
         }
 
         current = next(sect.content.end);
     }
-
-    return group;
 }
 
-Phrase createPhrase(str_cit start, str_cit end)
+void configurePhrase(conf::Phrase &phrase, str_cit start, str_cit end)
 {
-    Phrase phrase = {
-        .duration = 16,
-        .groups = {}};
 
     str_cit current = start;
 
@@ -311,7 +342,8 @@ Phrase createPhrase(str_cit start, str_cit end)
         }
         else if (sect.name == "shapes")
         {
-            phrase.groups.push_back(createGroup(sect.content.start, sect.content.end));
+            phrase.clusters.push_back(defaultCluster);
+            configureCluster(phrase.clusters.back(), sect.content.start, sect.content.end);
         }
         else
         {
@@ -320,15 +352,10 @@ Phrase createPhrase(str_cit start, str_cit end)
 
         current = next(sect.content.end);
     }
-
-    return phrase;
 }
 
-Performance createPerformance(const str &text)
+void configurePerformance(conf::Performance &performance, str &text)
 {
-    Performance perf = {
-        .bpm = 120,
-        .phrases = {}};
 
     str_cit start = text.begin();
     str_cit end = text.end();
@@ -340,11 +367,12 @@ Performance createPerformance(const str &text)
 
         if (sect.name == "bpm")
         {
-            perf.bpm = evaluate(sect.content.start, sect.content.end);
+            performance.bpm = evaluate(sect.content.start, sect.content.end);
         }
         else if (sect.name == "scene")
         {
-            perf.phrases.push_back(createPhrase(sect.content.start, sect.content.end));
+            performance.phrases.push_back(defaultPhrase);
+            configurePhrase(performance.phrases.back(), sect.content.start, sect.content.end);
         }
         else
         {
@@ -353,11 +381,9 @@ Performance createPerformance(const str &text)
 
         current = next(sect.content.end);
     }
-
-    return perf;
 }
 
-Performance read(const str &filepath)
+void read(conf::Performance &performance, const str &filepath)
 {
     std::ifstream ifs(filepath);
 
@@ -366,7 +392,7 @@ Performance read(const str &filepath)
 
     strip(content);
 
-    Performance perf = createPerformance(content);
-
-    return perf;
+    performance = defaultPerformance;
+    
+    configurePerformance(performance, content);
 }

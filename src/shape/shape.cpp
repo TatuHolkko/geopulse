@@ -1,25 +1,48 @@
 #include "shape.h"
-#include "../utility/utility.h"
+#include "../dynamic/deviator.h"
+#include "../dynamic/sequence.h"
 #include <GL/glut.h>
 
-
 Shape::Shape(int n,
-             DynamicSet<float> &angles,
-             DynamicSet<float> &radii,
-             DynamicSet<float> &red,
-             DynamicSet<float> &green,
-             DynamicSet<float> &blue,
+             conf::DeviatorSequence angleConf,
+             conf::DeviatorSequence radiusConf,
+             conf::DeviatorSequence redConf,
+             conf::DeviatorSequence greenConf,
+             conf::DeviatorSequence blueConf,
              Timer &t)
 {
+    // angle 0 must create a regular polygon
+    angleConf.paramSequence.delta.offset += 2 * PI / n;
+
+    Sequence<conf::FunctionParameters> angles_seq(angleConf.paramSequence.base, angleConf.paramSequence.delta);
+    Sequence<conf::FunctionParameters> radius_seq(radiusConf.paramSequence.base, radiusConf.paramSequence.delta);
+    Sequence<conf::FunctionParameters> red_seq(redConf.paramSequence.base, redConf.paramSequence.delta);
+    Sequence<conf::FunctionParameters> green_seq(greenConf.paramSequence.base, greenConf.paramSequence.delta);
+    Sequence<conf::FunctionParameters> blue_seq(blueConf.paramSequence.base, blueConf.paramSequence.delta);
 
     for (int i = 0; i < n; i++)
     {
+        deviators.push_back(Deviator<float>({angleConf.type, angles_seq.next()}, t));
+        Deviator<float> *angle_dev = &deviators.back();
+
+        deviators.push_back(Deviator<float>({radiusConf.type, radius_seq.next()}, t));
+        Deviator<float> *radius_dev = &deviators.back();
+
+        deviators.push_back(Deviator<float>({redConf.type, red_seq.next()}, t));
+        Deviator<float> *red_dev = &deviators.back();
+
+        deviators.push_back(Deviator<float>({greenConf.type, green_seq.next()}, t));
+        Deviator<float> *green_dev = &deviators.back();
+
+        deviators.push_back(Deviator<float>({blueConf.type, blue_seq.next()}, t));
+        Deviator<float> *blue_dev = &deviators.back();
+
         Vertex v = Vertex(
-            angles.generate(t),
-            radii.generate(t),
-            red.generate(t),
-            green.generate(t),
-            blue.generate(t));
+            *angle_dev,
+            *radius_dev,
+            *red_dev,
+            *green_dev,
+            *blue_dev);
 
         vertices.push_back(v);
     }

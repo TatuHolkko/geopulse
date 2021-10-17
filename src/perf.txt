@@ -3,52 +3,30 @@ scene
     duration: 16;
     shapes
     {
-        amount: 6;
-        vertices: 6;
+        amount: 3;
+        vertices: 3;
         radius
-        {
-            function: sine;
-            
-            phase
+        {   
+            offset
             {
-                base: 0;
-                dShape: 1;
-                dVertex: 0;
-                ddVertex: 0;
-            }
-            period
-            {
-                base: 1;
-                dShape: 1;
-                dVertex: 0;
-                ddVertex: 0;
+                base: 0.5;
+                dShape: 0.1;
             }
             amplitude
             {
-                base: 1;
-                dShape: 1;
-                dVertex: 0;
-                ddVertex: 0;
-            }
-            offset
-            {
-                base: 1;
-                dShape: 1;
-                dVertex: 0;
-                ddVertex: 0;
+                dShape: 0.1;
             }
         }
 
-        angle
+        red
         {
-            function: sine;
-
             offset
             {
-                base: 0;
-                dShape: 0;
-                dVertex: 0;
-                ddVertex: 0;
+                base: 0.5;
+            }
+            amplitude
+            {
+                base: 0.5;
             }
         }
     }

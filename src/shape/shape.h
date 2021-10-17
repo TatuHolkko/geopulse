@@ -8,12 +8,14 @@
 
 #include "vertex.h"
 #include "../dynamic/timer.h"
-#include "../dynamic/dynamicset.h"
+#include "../dynamic/deviator.h"
+#include "../utility/utility.h"
 #include <list>
 
 class Shape
 {
 private:
+    std::list<Deviator<float>> deviators;
     std::list<Vertex> vertices;
 
 public:
@@ -21,19 +23,19 @@ public:
      * @brief Construct a new Shape object
      * 
      * @param n Number of vertices
-     * @param angles angle dynamics
-     * @param radii radius dynamics
-     * @param red red dynamics
-     * @param green green dynamics
-     * @param blue blue dynamics
+     * @param angleConf angle dynamics
+     * @param radiusConf radius dynamics
+     * @param redConf red dynamics
+     * @param greenConf green dynamics
+     * @param blueConf blue dynamics
      * @param t timer
      */
     Shape(int n,
-          DynamicSet<float> &angles,
-          DynamicSet<float> &radii,
-          DynamicSet<float> &red,
-          DynamicSet<float> &green,
-          DynamicSet<float> &blue,
+          conf::DeviatorSequence angleConf,
+          conf::DeviatorSequence radiusConf,
+          conf::DeviatorSequence redConf,
+          conf::DeviatorSequence greenConf,
+          conf::DeviatorSequence blueConf,
           Timer &t);
 
     /**

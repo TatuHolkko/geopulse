@@ -6,7 +6,7 @@
 #ifndef DYNAMICSUPERSET_H
 #define DYNAMICSUPERSET_H
 
-#include "dynamicset.h"
+#include "sequence.h"
 #include "inputprovider.h"
 #include <list>
 
@@ -20,7 +20,7 @@
  */
 typedef struct MapperSuperParameters
 {
-    MapperFunction function;
+    FunctionType function;
     MapperParameters base;
     MapperParameters baseDelta;
     MapperParameters deltaBase;

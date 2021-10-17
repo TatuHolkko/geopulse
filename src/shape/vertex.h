@@ -9,7 +9,6 @@
 
 #include "../utility/utility.h"
 #include "../dynamic/dynamic.h"
-#include "../dynamic/dynamicset.h"
 #include "../color/color.h"
 
 class Vertex

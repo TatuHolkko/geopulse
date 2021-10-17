@@ -27,9 +27,9 @@ void tick(int value)
 int main(int argc, char *argv[])
 {
 	std::string path = std::string("perf.txt");
-	read(path);
-	
-	return 0;
+
+	conf::Performance perf;
+	read(perf, path);
 
 	timer = new Timer(TICK_DURATION, BPM);
 
@@ -38,50 +38,7 @@ int main(int argc, char *argv[])
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("GeoPulse");
 
-	MapperSuperParameters angle = {
-		HalfSine,
-		{0, 12, PI, 0}, //base
-		{4, 0, 0, 0},	//baseDelta
-		{0, 0, 0, 0},	//deltaBase
-		{0, 0, 0, 0}	//deltaBaseDelta
-	};
-
-	MapperSuperParameters radius = {
-		Sine,
-		{0, 1, 0, 0.2},	   //base
-		{0, 0, 0, 0.2}, //baseDelta
-		{0, 0, 0, 0},	   //deltaBase
-		{0, 0, 0, 0}	   //deltaBaseDelta
-	};
-
-	MapperSuperParameters red = {
-		Sine,
-		{0, 16, 0.5, 0.5}, //base
-		{0, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
-	MapperSuperParameters green = {
-		Sine,
-		{0, 8, 0.5, 0.5}, //base
-		{1, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
-	MapperSuperParameters blue = {
-		Sine,
-		{0, 1, 0, 0}, //base
-		{0, 0, 0, 0}, //baseDelta
-		{0, 0, 0, 0}, //deltaBase
-		{0, 0, 0, 0}  //deltaBaseDelta
-	};
-
-	scene = new Scene(angle,
-					  radius,
-					  red,
-					  green,
-					  blue,
-					  *timer);
+	scene = new Scene(perf.phrases.front().clusters, *timer);
 
 	glutDisplayFunc(redraw);
 	glutTimerFunc(TICK_DURATION, &tick, 0);
