@@ -4,18 +4,23 @@ scene
     duration: 16;
     shapes
     {
-        amount: 3;
-        vertices: 3;
+        amount: 32;
+        vertices: 16;
         radius
         {   
             offset
             {
-                base: 0.5;
-                dShape: 0.1;
+                base: 0.2;
+                ddVertex: 0.001;
             }
             amplitude
             {
-                dShape: 0.1;
+                ddVertex: 0.001;
+            }
+            period
+            {
+                base:8;
+                ddVertex: 0.1;
             }
         }
 
@@ -23,13 +28,16 @@ scene
         {
             amplitude
             {
-                base: 0.3;
-                dShape: 2;
+                base: 15;
+                dShape: 3;
             }
             phase
             {
-                base: 2;
-                dShape: 1;
+                dShape: 0.05;
+            }
+            period
+            {
+                base: 64;
             }
         }
 
@@ -42,6 +50,24 @@ scene
             amplitude
             {
                 base: 0.5;
+            }
+            period
+            {
+                base: 32;
+                ddVertex: 0.1;
+            }
+        }
+        green
+        {
+            offset
+            {
+                base: 0.5;
+            }
+            period
+            {
+                base: 64;
+                dShape: 4;
+                ddVertex: 0.5;
             }
         }
     }

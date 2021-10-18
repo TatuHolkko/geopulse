@@ -89,6 +89,16 @@ bool is_number(const std::string& s)
     return !s.empty() && it == s.end();
 }
 
+Deviator scaleDeviator(Deviator dev, float scale)
+{
+    return {
+        .base = dev.base * scale,
+        .dShape = dev.dShape * scale,
+        .dVertex = dev.dVertex * scale,
+        .ddVertex = dev.ddVertex * scale
+    };
+}
+
 void strip(str &content)
 {
     str::iterator end_pos;
@@ -319,6 +329,9 @@ void configureCluster(conf::Cluster &cluster, str_cit start, str_cit end)
         {
             Function f;
             configureFunction(f, sect.content.start, sect.content.end);
+            const float degToRad = PI/180.0;
+            f.amplitude = scaleDeviator(f.amplitude, degToRad);
+            f.offset = scaleDeviator(f.offset, degToRad);
             convertToInternalConf(cluster.angle, f);
         }
         else if (sect.name == "radius")
