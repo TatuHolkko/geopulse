@@ -79,6 +79,16 @@ bool operator==(const StrRange &lhs, const str &rhs)
     return true;
 }
 
+bool is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && (std::isdigit(*it) || *it == '.'))
+    {
+        ++it;
+    } 
+    return !s.empty() && it == s.end();
+}
+
 void strip(str &content)
 {
     str::iterator end_pos;
@@ -124,7 +134,7 @@ str_cit matchingBracket(str_cit start, str_cit end)
         }
         current++;
     }
-    logger->errorPoint(start, "No closing bracket found.");
+    logger->errorPoint({start}, "No closing bracket found.");
     throw ParsingException();
 }
 
@@ -133,7 +143,7 @@ Section getNextSection(str_cit start, str_cit end)
     str_cit blockStart = findFirst(start, end, {':', '{'});
     if (blockStart == end)
     {
-        logger->errorPoint(start, "Expected section declaration.");
+        logger->errorPoint({start}, "Expected section declaration.");
         throw ParsingException();
     }
 
@@ -147,7 +157,7 @@ Section getNextSection(str_cit start, str_cit end)
         blockEnd = findFirst(blockStart, end, {';'});
         if (blockEnd == end)
         {
-            logger->errorPoint(start, "Section block not closed with a semicolon.");
+            logger->errorPoint({start}, "Section block not closed with a semicolon.");
             throw ParsingException();
         }
     }
@@ -167,16 +177,18 @@ float evaluate(str_cit start, str_cit end)
         buffer.push_back(*current);
         current++;
     }
-
-    try
+    if (is_number(buffer))
     {
-        return std::stof(buffer);
+        try
+        {
+            return std::stof(buffer);
+        }
+        catch (const std::invalid_argument &e)
+        {
+        }
     }
-    catch (const std::invalid_argument &e)
-    {
-        logger->errorRange({start, end}, "Can not evaluate block into a numerical value.");
-        throw ParsingException();
-    }
+    logger->errorRange({start, end}, "Can not evaluate block into a numerical value.");
+    throw ParsingException();
 }
 
 void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
@@ -204,7 +216,7 @@ void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
         }
         else
         {
-            logger->errorRange(sect.name, "Invalid Deviator property name.");
+            logger->errorRange({sect.name.start, sect.name.end}, "Invalid Deviator property name.");
             throw ParsingException();
         }
 
@@ -248,13 +260,13 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
             }
             else
             {
-                logger->errorRange(sect.content, "Invalid function type.");
+                logger->errorRange({sect.content.start, sect.content.end}, "Invalid function type.");
                 throw ParsingException();
             }
         }
         else
         {
-            logger->errorRange(sect.name, "Invalid function property name.");
+            logger->errorRange({sect.name.start, sect.name.end}, "Invalid function property name.");
             throw ParsingException();
         }
 
@@ -335,7 +347,7 @@ void configureCluster(conf::Cluster &cluster, str_cit start, str_cit end)
         }
         else
         {
-            logger->errorRange(sect.name, "Invalid Cluster property name.");
+            logger->errorRange({sect.name.start, sect.name.end}, "Invalid Cluster property name.");
             throw ParsingException();
         }
 
@@ -363,7 +375,7 @@ void configurePhrase(conf::Phrase &phrase, str_cit start, str_cit end)
         }
         else
         {
-            logger->errorRange(sect.name, "Invalid Phrase property name.");
+            logger->errorRange({sect.name.start, sect.name.end}, "Invalid Phrase property name.");
             throw ParsingException();
         }
 
@@ -393,7 +405,7 @@ void configurePerformance(conf::Performance &performance, const str &text)
         }
         else
         {
-            logger->errorRange(sect.name, "Invalid Performance property name.");
+            logger->errorRange({sect.name.start, sect.name.end}, "Invalid Performance property name.");
             throw ParsingException();
         }
 

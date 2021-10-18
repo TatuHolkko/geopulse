@@ -28,7 +28,8 @@ scene
             }
             phase
             {
-                dShape:
+                base: 2;
+                dShape: 1;
             }
         }
 

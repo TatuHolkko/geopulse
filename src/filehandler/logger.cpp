@@ -6,37 +6,42 @@ Logger::Logger(const str &original, const str &stripped) : original_fileContent(
 {
 }
 
-void Logger::errorPoint(str_cit iterator, const str &message)
+void Logger::errorPoint(InternalPoint defect, const str &message)
 {
-    int startLocation = getLocation(iterator);
-    StrRange line = getLine(startLocation);
-    errorRange(line, message);
+    int location = getLocation(defect);
+    ExternalRange lineContent = getLine(location);
+    printError(lineContent, message);
 }
 
-void Logger::errorRange(StrRange range, const str &message)
+void Logger::errorRange(InternalRange defect, const str &message)
 {
-    int startLocation = getLocation(range.start);
-    int lineNum = lineNumber(startLocation);
+    ExternalRange startLine = getLine(getLocation(defect.start));
+    ExternalRange endLine = getLine(getLocation(defect.end));
+    printError({startLine.start, endLine.end}, message);
+}
+
+void Logger::printError(ExternalRange defect, const str& message)
+{
     printString("# Error on line ");
-    printString(std::to_string(lineNum));
+    printString(std::to_string(lineNumber(defect.start)));
     printString(":\n\n> \n> ");
-    printRange(range, true);
+    printRange({defect.start.iterator, defect.end.iterator}, true);
     printString("\n>\n\n# ");
     printString(message);
     printString("\n");
 }
 
-int Logger:: getLocation(str_cit internalLocation)
+int Logger::getLocation(InternalPoint point)
 {
-    return std::distance(internal_fileContent.begin(), internalLocation);
+    return std::distance(internal_fileContent.begin(), point.iterator);
 }
 
-int Logger::lineNumber(int location)
+int Logger::lineNumber(ExternalPoint point)
 {
     int lineNumber = 1;
     str_cit current = original_fileContent.begin();
 
-    while(*current == ' ' || *current == '\n' || *current == '\t')
+    while(current != point.iterator)
     {
         if (*current == '\n')
         {
@@ -45,30 +50,16 @@ int Logger::lineNumber(int location)
         current = next(current);
     }
 
-    for (int i = 0; i < location; i++)
-    {
-        current = next(current);
-
-        while(*current == ' ' || *current == '\n' || *current == '\t')
-        {
-            if (*current == '\n')
-            {
-                lineNumber++;
-            }
-            current = next(current);
-        }
-    }
-
     return lineNumber;
 }
 
-StrRange Logger::getLine(int location)
+ExternalRange Logger::getLine(int internalLocation)
 {
     str_cit startOfLine = original_fileContent.begin();
     str_cit endOfLine = startOfLine;
     str_cit current = startOfLine;
 
-    for (int i = 0; i < location; i++)
+    for (int i = 0; i < internalLocation; i++)
     {
         current = next(current);
         while(*current == ' ' || *current == '\n' || *current == '\t')
@@ -111,12 +102,4 @@ void Logger::printRange(StrRange message, bool indent)
 void Logger::printString(const str& message)
 {
     std::cout << message;
-}
-
-void Logger::step(str_cit &iterator)
-{
-    do
-    {
-        iterator = next(iterator);
-    } while (*iterator == ' ' || *iterator == '\n' || *iterator == '\t');
 }
