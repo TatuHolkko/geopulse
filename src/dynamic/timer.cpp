@@ -1,6 +1,6 @@
 #include "timer.h"
 
-Timer::Timer(unsigned int tickDuration_ms, float bpm) : InputProvider()
+Timer::Timer(const unsigned int &tickDuration_ms, const float &bpm) : InputProvider()
 {
     ticks = 0;
     beats = 0;
@@ -8,17 +8,21 @@ Timer::Timer(unsigned int tickDuration_ms, float bpm) : InputProvider()
     ticksMax = BEATS_MAX / beatsPerTick;
 }
 
-void Timer::tick(){
+void Timer::tick()
+{
     ticks++;
-    if (ticks >= ticksMax){
+    if (ticks >= ticksMax)
+    {
         ticks = 0;
     }
 }
 
-float Timer::getBeats(){
+float Timer::getBeats() const
+{
     return (float)ticks * (float)beatsPerTick;
 }
 
-float Timer::provideInput(){
+float Timer::provideInput()
+{
     return getBeats();
 }

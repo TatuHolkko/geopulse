@@ -5,7 +5,7 @@ template <typename T>
 class Dynamic{
 public:
     virtual ~Dynamic() {};
-    virtual T get() = 0;
+    virtual T get() const = 0;
 };
 
 #endif

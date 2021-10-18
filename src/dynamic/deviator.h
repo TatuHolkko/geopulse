@@ -30,7 +30,7 @@ public:
      * @param function Function configuration object describing the behavior of the value
      * @param ip input provider for the input into the mapper
      */
-    Deviator(conf::Function function, InputProvider& ip);
+    Deviator(const conf::Function& function, InputProvider& ip);
 
     /**
      * @brief Call the input provider and feed it to the mapper, which will
@@ -38,7 +38,7 @@ public:
      * 
      * @return float
      */
-    T get();
+    T get() const;
 };
 
 #endif

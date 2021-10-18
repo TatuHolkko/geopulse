@@ -1,3 +1,4 @@
+bpm: 174;
 scene
 {
     duration: 16;
@@ -15,6 +16,19 @@ scene
             amplitude
             {
                 dShape: 0.1;
+            }
+        }
+
+        angle
+        {
+            amplitude
+            {
+                base: 0.3;
+                dShape: 2;
+            }
+            phase
+            {
+                dShape:
             }
         }
 

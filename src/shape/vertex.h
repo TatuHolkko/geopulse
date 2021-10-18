@@ -13,9 +13,9 @@
 
 class Vertex
 {
-    Dynamic<float> *a;
-    Dynamic<float> *r;
-    Color color;
+    const Dynamic<float> *a;
+    const Dynamic<float> *r;
+    const Color color;
 
 public:
     /**
@@ -27,25 +27,25 @@ public:
      * @param green green value
      * @param blue blue value
      */
-    Vertex(Dynamic<float> &angle,
-           Dynamic<float> &radius,
-           Dynamic<float> &red,
-           Dynamic<float> &green,
-           Dynamic<float> &blue);
+    Vertex(const Dynamic<float> &angle,
+           const Dynamic<float> &radius,
+           const Dynamic<float> &red,
+           const Dynamic<float> &green,
+           const Dynamic<float> &blue);
 
     /**
      * @brief Get cardinal coordinates
      * 
      * @return Point (x,y)
      */
-    Point getPos();
+    Point getPos() const;
 
     /**
      * @brief Get the Color of this vertex
      * 
      * @return RGB
      */
-    RGB getColor();
+    RGB getColor() const ;
 };
 
 #endif

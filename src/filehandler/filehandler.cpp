@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <exception>
 
-const char* ParsingException::what() const throw()
+const char *ParsingException::what() const throw()
 {
     return "Failed to parse performance file.";
 }
@@ -34,7 +34,7 @@ typedef struct Function
     Deviator offset;
 } Function;
 
-static Logger* logger;
+static Logger *logger;
 
 const conf::Cluster defaultCluster = {.vertices = 6,
                                       .amount = 1,
@@ -90,7 +90,7 @@ void strip(str &content)
     content.erase(end_pos, content.end());
 }
 
-str_cit findFirst(str_cit start, str_cit end, std::list<char> chars)
+str_cit findFirst(str_cit start, str_cit end, const std::list<char> &chars)
 {
     str_cit result = end;
     for (char c : chars)
@@ -172,12 +172,11 @@ float evaluate(str_cit start, str_cit end)
     {
         return std::stof(buffer);
     }
-    catch(const std::invalid_argument& e)
+    catch (const std::invalid_argument &e)
     {
         logger->errorRange({start, end}, "Can not evaluate block into a numerical value.");
         throw ParsingException();
     }
-    
 }
 
 void configureDeviator(Deviator &deviator, str_cit confStart, str_cit confEnd)
@@ -372,7 +371,7 @@ void configurePhrase(conf::Phrase &phrase, str_cit start, str_cit end)
     }
 }
 
-void configurePerformance(conf::Performance &performance, str &text)
+void configurePerformance(conf::Performance &performance, const str &text)
 {
 
     str_cit start = text.begin();
@@ -407,7 +406,7 @@ void read(conf::Performance &performance, const str &filepath)
     std::ifstream ifs(filepath);
 
     str original_content((std::istreambuf_iterator<char>(ifs)),
-                (std::istreambuf_iterator<char>()));
+                         (std::istreambuf_iterator<char>()));
     str stripped_content(original_content);
 
     strip(stripped_content);
@@ -415,7 +414,7 @@ void read(conf::Performance &performance, const str &filepath)
     performance = defaultPerformance;
 
     Logger _logger(original_content, stripped_content);
-    
+
     logger = &_logger;
 
     configurePerformance(performance, stripped_content);

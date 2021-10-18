@@ -26,7 +26,7 @@ public:
      * @param base Starting value of the sequence
      * @param delta Difference between adjacent sequence objects
      */
-    Sequence(T base, T delta);
+    Sequence(const T &base, const T &delta);
 
     /**
      * @brief Add delta and create a new object

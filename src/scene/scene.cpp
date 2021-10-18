@@ -14,11 +14,11 @@ Scene::Scene(const std::list<conf::Cluster> &clusters,
     }
 }
 
-void Scene::draw()
+void Scene::draw() const
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (Cluster &cluster : clusters)
+    for (const Cluster &cluster : clusters)
     {
         cluster.draw();
     }

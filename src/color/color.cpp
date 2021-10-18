@@ -1,15 +1,15 @@
 #include "color.h"
 #include <utility>
 
-Color::Color(Dynamic<float> &red,
-             Dynamic<float> &green,
-             Dynamic<float> &blue) : red(&red),
-                                     green(&green),
-                                     blue(&blue)
+Color::Color(const Dynamic<float> &red,
+             const Dynamic<float> &green,
+             const Dynamic<float> &blue) : red(&red),
+                                           green(&green),
+                                           blue(&blue)
 {
 }
 
-RGB Color::get()
+RGB Color::get() const
 {
     return {
         clamp(red->get()),
@@ -17,7 +17,7 @@ RGB Color::get()
         clamp(blue->get())};
 }
 
-float clamp(float value)
+float clamp(const float &value)
 {
     if (value > 1)
     {
@@ -30,7 +30,7 @@ float clamp(float value)
     return value;
 }
 
-RGB operator+(const RGB a, const RGB b)
+RGB operator+(const RGB &a, const RGB &b)
 {
     return {
         clamp(a.R + b.R),
@@ -38,7 +38,7 @@ RGB operator+(const RGB a, const RGB b)
         clamp(a.B + b.B)};
 }
 
-RGB operator*(const RGB a, const float b)
+RGB operator*(const RGB &a, const float &b)
 {
     return {
         clamp(a.R * b),

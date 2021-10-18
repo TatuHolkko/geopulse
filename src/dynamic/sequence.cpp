@@ -3,10 +3,10 @@
 
 template <typename T>
 Sequence<T>::Sequence(
-    T base,
-    T delta) : items({}),
-               base(base),
-               delta(delta)
+    const T &base,
+    const T &delta) : items({}),
+                      base(base),
+                      delta(delta)
 {
 }
 

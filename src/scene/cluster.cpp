@@ -49,9 +49,9 @@ Cluster::Cluster(conf::Cluster conf, Timer &t)
     }
 }
 
-void Cluster::draw()
+void Cluster::draw() const
 {
-    for (Shape &shape : shapes)
+    for (const Shape &shape : shapes)
     {
         shape.draw();
     }

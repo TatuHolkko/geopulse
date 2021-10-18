@@ -12,7 +12,7 @@ class Cluster
 public:
     Cluster(conf::Cluster conf, Timer &t);
 
-    void draw();
+    void draw() const;
 };
 
 #endif

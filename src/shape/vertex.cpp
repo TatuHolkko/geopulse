@@ -1,24 +1,24 @@
 #include "vertex.h"
 #include <cmath>
 
-Vertex::Vertex(Dynamic<float> &angle,
-               Dynamic<float> &radius,
-               Dynamic<float> &red,
-               Dynamic<float> &green,
-               Dynamic<float> &blue) : a(&angle),
-                                        r(&radius),
-                                        color(red, green, blue)
+Vertex::Vertex(const Dynamic<float> &angle,
+               const Dynamic<float> &radius,
+               const Dynamic<float> &red,
+               const Dynamic<float> &green,
+               const Dynamic<float> &blue) : a(&angle),
+                                             r(&radius),
+                                             color(red, green, blue)
 {
 }
 
-Point Vertex::getPos()
+Point Vertex::getPos() const
 {
     float x = sin(a->get()) * r->get();
     float y = cos(a->get()) * r->get();
     return {x, y};
 }
 
-RGB Vertex::getColor()
+RGB Vertex::getColor() const
 {
     return color.get();
 }

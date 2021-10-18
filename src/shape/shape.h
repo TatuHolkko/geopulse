@@ -31,17 +31,17 @@ public:
      * @param t timer
      */
     Shape(int n,
-          conf::DeviatorSequence angleConf,
-          conf::DeviatorSequence radiusConf,
-          conf::DeviatorSequence redConf,
-          conf::DeviatorSequence greenConf,
-          conf::DeviatorSequence blueConf,
+          const conf::DeviatorSequence& angleConf,
+          const conf::DeviatorSequence& radiusConf,
+          const conf::DeviatorSequence& redConf,
+          const conf::DeviatorSequence& greenConf,
+          const conf::DeviatorSequence& blueConf,
           Timer &t);
 
     /**
      * @brief Draw the shape
      */
-    void draw();
+    void draw() const;
 };
 
 #endif

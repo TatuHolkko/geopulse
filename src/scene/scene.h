@@ -21,7 +21,7 @@ public:
     Scene(const std::list<conf::Cluster>& clusters,
           Timer &t);
 
-    void draw();
+    void draw() const;
 };
 
 #endif

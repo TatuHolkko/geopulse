@@ -4,17 +4,19 @@
 #include <GL/glut.h>
 
 Shape::Shape(int n,
-             conf::DeviatorSequence angleConf,
-             conf::DeviatorSequence radiusConf,
-             conf::DeviatorSequence redConf,
-             conf::DeviatorSequence greenConf,
-             conf::DeviatorSequence blueConf,
+             const conf::DeviatorSequence &angleConf,
+             const conf::DeviatorSequence &radiusConf,
+             const conf::DeviatorSequence &redConf,
+             const conf::DeviatorSequence &greenConf,
+             const conf::DeviatorSequence &blueConf,
              Timer &t)
 {
+    conf::DeviatorSequence angleTemp = angleConf;
     // angle 0 must create a regular polygon
-    angleConf.paramSequence.delta.offset += 2 * PI / n;
+    angleTemp.paramSequence.delta.offset += 2 * PI / n;
 
-    Sequence<conf::FunctionParameters> angles_seq(angleConf.paramSequence.base, angleConf.paramSequence.delta);
+
+    Sequence<conf::FunctionParameters> angles_seq(angleTemp.paramSequence.base, angleTemp.paramSequence.delta);
     Sequence<conf::FunctionParameters> radius_seq(radiusConf.paramSequence.base, radiusConf.paramSequence.delta);
     Sequence<conf::FunctionParameters> red_seq(redConf.paramSequence.base, redConf.paramSequence.delta);
     Sequence<conf::FunctionParameters> green_seq(greenConf.paramSequence.base, greenConf.paramSequence.delta);
@@ -22,7 +24,7 @@ Shape::Shape(int n,
 
     for (int i = 0; i < n; i++)
     {
-        deviators.push_back(Deviator<float>({angleConf.type, angles_seq.next()}, t));
+        deviators.push_back(Deviator<float>({angleTemp.type, angles_seq.next()}, t));
         Deviator<float> *angle_dev = &deviators.back();
 
         deviators.push_back(Deviator<float>({radiusConf.type, radius_seq.next()}, t));
@@ -48,13 +50,13 @@ Shape::Shape(int n,
     }
 }
 
-void Shape::draw()
+void Shape::draw() const
 {
     glBegin(GL_LINES);
 
     //init iterator to the second vertex
-    std::list<Vertex>::iterator previous = prev(vertices.end());
-    std::list<Vertex>::iterator current = vertices.begin();
+    std::list<Vertex>::const_iterator previous = prev(vertices.end());
+    std::list<Vertex>::const_iterator current = vertices.begin();
 
     while (current != vertices.end())
     {

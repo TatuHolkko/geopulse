@@ -21,8 +21,8 @@ class Function
 private:
     FunctionType type;
     conf::FunctionParameters params;
-    float sine(float input);
-    float halfSine(float input);
+    float sine(const float &input) const;
+    float halfSine(const float &input) const;
 
 public:
     /**
@@ -31,9 +31,9 @@ public:
      * @param fn Function type
      * @param params Parameters for the function
      */
-    Function(FunctionType fn, conf::FunctionParameters params);
+    Function(const FunctionType fn, const conf::FunctionParameters &params);
     Function();
-    float getValue(float input);
+    float getValue(const float &input) const;
 };
 
 #endif

@@ -11,16 +11,15 @@
 // number at which the beats wrap back to zero
 #define BEATS_MAX 360
 
-class Timer : public InputProvider {
+class Timer : public InputProvider
+{
 private:
-    
     unsigned long ticks;
     unsigned long ticksMax;
-    
+
     unsigned int beats;
 
     float beatsPerTick;
-    
 
 public:
     /**
@@ -29,7 +28,7 @@ public:
      * @param tickDuration_ms number of milliseconds per tick
      * @param bpm Beats per minute
      */
-    Timer(unsigned int tickDuration_ms, float bpm);
+    Timer(const unsigned int &tickDuration_ms, const float &bpm);
 
     /**
      * @brief Increment the tick counter and other counters
@@ -43,7 +42,7 @@ public:
      * 
      * @return float 
      */
-    float getBeats();
+    float getBeats() const;
 
     float provideInput();
 };
