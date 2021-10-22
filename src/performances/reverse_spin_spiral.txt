@@ -1,4 +1,4 @@
-bpm: 173;
+bpm: 174;
 scene
 {
     duration: 16;
@@ -10,12 +10,12 @@ scene
         {   
             offset
             {
-                base: 0.1;
-                dShape: 0.05;
+                base: 0.01;
+                ddVertex: 0.005;
             }
             amplitude
             {
-                ddVertex: 0.00;
+                ddVertex: 0.001;
             }
             period
             {
@@ -26,15 +26,15 @@ scene
 
         angle
         {
-            function: sine;
+            function: halfsine;
             amplitude
             {
-                base: 15;
-                dShape: 1;
+                base: 120;
+                dShape: 15;
             }
             phase
             {
-                dShape: 1;
+                dShape: 0.1;
             }
             period
             {
@@ -55,10 +55,7 @@ scene
             period
             {
                 base: 32;
-            }
-            phase
-            {
-                dShape: 1;
+                ddVertex: 0.1;
             }
         }
         green
@@ -74,14 +71,11 @@ scene
             period
             {
                 base: 64;
-            }
-            phase
-            {
-                base: 32;
-                dShape: 1;
+                dShape: 4;
+                ddVertex: 0.5;
             }
         }
-        green
+        blue
         {
             offset
             {
@@ -93,12 +87,9 @@ scene
             }
             period
             {
-                base: 16;
-            }
-            phase
-            {
-                base: 8;
-                dShape: 1;
+                base: 96;
+                dShape: 2;
+                ddVertex: 1;
             }
         }
 

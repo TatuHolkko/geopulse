@@ -4,7 +4,7 @@ scene
     duration: 16;
     shapes
     {
-        amount: 64;
+        amount: 4;
         vertices: 3;
         radius
         {   
