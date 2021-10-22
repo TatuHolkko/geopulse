@@ -1,11 +1,11 @@
-bpm: 174.5;
+bpm: 178;
 scene
 {
     duration: 16;
     shapes
     {
-        amount: 15;
-        vertices: 2;
+        amount: 16;
+        vertices: 6;
         radius
         {   
             offset
@@ -29,7 +29,7 @@ scene
             function: halfsine;
             amplitude
             {
-                base: 4;
+                base: 60;
                 dShape: 4;
             }
             phase
@@ -38,12 +38,13 @@ scene
             }
             period
             {
-                base: 2;
+                base: 16;
             }
         }
 
         red
         {
+            function: halfsine;
             offset
             {
                 base: 0.5;
@@ -52,13 +53,13 @@ scene
             {
                 base: 0.5;
             }
-            period
-            {
-                base: 32;
-            }
             phase
             {
-                dShape: 1;
+                dShape: 0.125;
+            }
+            period
+            {
+                base: 16;
             }
         }
         green

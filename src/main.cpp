@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	timer = new Timer(TICK_DURATION, perf.bpm);
+	timer = new Timer(perf.bpm);
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

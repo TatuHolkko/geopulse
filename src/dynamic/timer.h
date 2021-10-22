@@ -8,31 +8,39 @@
 
 #include "inputprovider.h"
 
+#include <chrono>
+
+using namespace std::chrono;
+
 // number at which the beats wrap back to zero
 #define BEATS_MAX 360
 
 class Timer : public InputProvider
 {
 private:
-    unsigned long ticks;
-    unsigned long ticksMax;
+    
+    high_resolution_clock::time_point startTime;
 
-    unsigned int beats;
+    double passedMilliseconds;
 
-    float beatsPerTick;
+    float beatsPerMinute;
 
 public:
     /**
      * @brief Create the Timer object
      * 
-     * @param tickDuration_ms number of milliseconds per tick
      * @param bpm Beats per minute
      */
-    Timer(const unsigned int &tickDuration_ms, const float &bpm);
+    Timer(const float &bpm);
 
     /**
-     * @brief Increment the tick counter and other counters
-     *        accordingly.
+     * @brief Reset beats and align beats with current time
+     * 
+     */
+    void reset();
+
+    /**
+     * @brief Update internal passed time
      * 
      */
     void tick();

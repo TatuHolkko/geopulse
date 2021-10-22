@@ -1,4 +1,4 @@
-bpm: 174.5;
+bpm: 174;
 scene
 {
     duration: 16;
@@ -38,7 +38,7 @@ scene
             }
             period
             {
-                base: 2;
+                base: 4;
             }
         }
 
