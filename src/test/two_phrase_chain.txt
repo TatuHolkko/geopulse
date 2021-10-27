@@ -4,8 +4,8 @@ scene
     duration: 6;
     shapes
     {
-        amount: 4;
-        vertices: 4;
+        amount: 3;
+        vertices: 3;
         radius
         {   
             offset
@@ -17,14 +17,13 @@ scene
 
         angle
         {
-            function: halfsine;
             amplitude
             {
-                base: 90;
+                base: 4;
             }
             period
             {
-                base: 3;
+                base: 1;
             }
         }
 
@@ -33,11 +32,11 @@ scene
 
 scene
 {
-    duration: 6;
+    duration: 2;
     shapes
     {
-        amount: 4;
-        vertices: 4;
+        amount: 3;
+        vertices: 3;
         radius
         {   
             offset
@@ -52,11 +51,11 @@ scene
             function: halfsine;
             amplitude
             {
-                base: 90;
+                base: 120;
             }
             period
             {
-                base: -3;
+                base: 2;
             }
         }
 

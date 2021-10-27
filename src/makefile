@@ -10,7 +10,7 @@ TARGET = geopulse
 VERBOSE = FALSE
 
 # Create the list of directories
-DIRS = scene dynamic color shape utility filehandler test
+DIRS = scene dynamic color shape utility filehandler test performance
 SOURCEDIRS = $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
 TARGETDIRS = $(foreach dir, $(DIRS), $(addprefix $(BUILDDIR)/, $(dir)))
 
@@ -74,6 +74,10 @@ $(1)/%.o: %.cpp
 	$(HIDE)$$(CXX) $$(CXXFLAGS) -c $$(INCLUDES) -o $$(subst /,$$(PSEP),$$@) $$(subst /,$$(PSEP),$$<) -MMD
 endef
 
+main.o: main.cpp
+	@echo Building $@
+	$(HIDE)$(CXX) $(CXXFLAGS) -c $(INCLUDES) -o $(subst /,$(PSEP),$@) $(subst /,$(PSEP),$<) -MMD
+
 .PHONY: all clean directories 
 
 all: directories $(TARGET)
@@ -95,4 +99,6 @@ directories:
 clean:
 	$(HIDE)$(RMDIR) $(subst /,$(PSEP),$(TARGETDIRS)) $(ERRIGNORE)
 	$(HIDE)$(RM) $(TARGET) $(ERRIGNORE)
+	$(HIDE)$(RM) main.o $(ERRIGNORE)
+	$(HIDE)$(RM) main.d $(ERRIGNORE)
 	@echo Cleaning done ! 

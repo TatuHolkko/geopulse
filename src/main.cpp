@@ -1,4 +1,4 @@
-#include "scene/scene.h"
+#include "performance/performance.h"
 #include "dynamic/timer.h"
 #include "utility/utility.h"
 #include "filehandler/filehandler.h"
@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <vector>
 
-Scene *scene;
+Performance *performance;
 Timer *timer;
 
 // tick duration in ms
@@ -21,7 +21,7 @@ class InputParser{
             for (int i=1; i < argc; ++i)
                 this->tokens.push_back(std::string(argv[i]));
         }
-        /// @author iain
+
         const std::string& getCmdOption(const std::string &option) const{
             std::vector<std::string>::const_iterator itr;
             itr =  std::find(this->tokens.begin(), this->tokens.end(), option);
@@ -31,7 +31,7 @@ class InputParser{
             static const std::string empty_string("");
             return empty_string;
         }
-        /// @author iain
+
         bool cmdOptionExists(const std::string &option) const{
             return std::find(this->tokens.begin(), this->tokens.end(), option)
                    != this->tokens.end();
@@ -66,13 +66,13 @@ int main(int argc, char *argv[])
 	glutInitWindowSize(1000, 1000);
 	glutCreateWindow("GeoPulse");
 
-	scene = new Scene(perf.phrases.front().clusters, *timer);
+	performance = new Performance(perf, *timer);
 
 	glutDisplayFunc(redraw);
 	glutTimerFunc(TICK_DURATION, &tick, 0);
 	glutMainLoop();
 
-	delete scene;
+	delete performance;
 	delete timer;
 
 	return 0;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
 void redraw()
 {
-	scene->draw();
+	performance->draw();
 }
 
 void tick(int value)

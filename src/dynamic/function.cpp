@@ -40,6 +40,6 @@ float Function::sine(const float &input) const
 
 float Function::halfSine(const float &input) const
 {
-    float remainder = fmod(input + params.phase, params.period / 2);
-    return params.offset + params.amp * sin((remainder / params.period) * 2 * PI - PI / 2);
+    float remainder = fmod(input + params.phase, params.period);
+    return params.offset + params.amp * sin((remainder / params.period / 2) * 2 * PI - PI / 2);
 }

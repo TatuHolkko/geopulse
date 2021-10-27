@@ -75,7 +75,7 @@ namespace conf
 
     typedef struct Phrase
     {
-        int duration;
+        float duration;
         std::list<Cluster> clusters;
     } Phrase;
 

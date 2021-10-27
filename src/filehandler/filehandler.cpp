@@ -83,6 +83,13 @@ bool operator==(const StrRange &lhs, const str &rhs)
 bool is_number(const std::string &s)
 {
     std::string::const_iterator it = s.begin();
+    if (*it == '.'){
+        return false;
+    }
+    if (*it == '-')
+    {
+        it++;
+    }
     while (it != s.end() && (std::isdigit(*it) || *it == '.'))
     {
         ++it;
