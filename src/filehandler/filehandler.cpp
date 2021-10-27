@@ -5,6 +5,7 @@
 #include <fstream>
 #include <algorithm>
 #include <exception>
+#include <iostream>
 
 const char *ParsingException::what() const throw()
 {
@@ -79,13 +80,13 @@ bool operator==(const StrRange &lhs, const str &rhs)
     return true;
 }
 
-bool is_number(const std::string& s)
+bool is_number(const std::string &s)
 {
     std::string::const_iterator it = s.begin();
     while (it != s.end() && (std::isdigit(*it) || *it == '.'))
     {
         ++it;
-    } 
+    }
     return !s.empty() && it == s.end();
 }
 
@@ -95,8 +96,7 @@ Deviator scaleDeviator(Deviator dev, float scale)
         .base = dev.base * scale,
         .dShape = dev.dShape * scale,
         .dVertex = dev.dVertex * scale,
-        .ddVertex = dev.ddVertex * scale
-    };
+        .ddVertex = dev.ddVertex * scale};
 }
 
 void strip(str &content)
@@ -329,7 +329,7 @@ void configureCluster(conf::Cluster &cluster, str_cit start, str_cit end)
         {
             Function f;
             configureFunction(f, sect.content.start, sect.content.end);
-            const float degToRad = PI/180.0;
+            const float degToRad = PI / 180.0;
             f.amplitude = scaleDeviator(f.amplitude, degToRad);
             f.offset = scaleDeviator(f.offset, degToRad);
             convertToInternalConf(cluster.angle, f);
@@ -426,7 +426,7 @@ void configurePerformance(conf::Performance &performance, const str &text)
     }
 }
 
-void read(conf::Performance &performance, const str &filepath)
+bool read(conf::Performance &performance, const str &filepath)
 {
     std::ifstream ifs(filepath);
 
@@ -442,5 +442,15 @@ void read(conf::Performance &performance, const str &filepath)
 
     logger = &_logger;
 
-    configurePerformance(performance, stripped_content);
+    try
+    {
+        configurePerformance(performance, stripped_content);
+    }
+    catch (const ParsingException &e)
+    {
+        std::cerr << e.what() << std::endl;
+        return false;
+    }
+
+    return true;
 }

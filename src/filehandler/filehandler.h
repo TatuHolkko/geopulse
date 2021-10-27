@@ -11,6 +11,14 @@ public:
   virtual const char* what() const throw();
 };
 
-void read(conf::Performance &performance, const std::string &filepath);
+/**
+ * @brief Create a performance configuration from a file
+ * 
+ * @param performance conf::Performance struct to write to
+ * @param filepath Filepath
+ * 
+ * @return True if the performance was written, false otherwise
+ */
+bool read(conf::Performance &performance, const std::string &filepath);
 
 #endif

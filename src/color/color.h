@@ -28,7 +28,11 @@ public:
     Color(const Dynamic<float> &red,
           const Dynamic<float> &green,
           const Dynamic<float> &blue);
-
+    /**
+     * @brief Get values for all dynamics and combine them to an RGB struct
+     * 
+     * @return RGB 
+     */
     RGB get() const;
 };
 

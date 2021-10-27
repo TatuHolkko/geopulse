@@ -26,13 +26,25 @@ private:
 
 public:
     /**
-     * @brief Construct a new Mapper object
+     * @brief Construct a new Function object
      * 
      * @param fn Function type
      * @param params Parameters for the function
      */
     Function(const FunctionType fn, const conf::FunctionParameters &params);
+
+    /**
+     * @brief Construct a new Function object with default parameters
+     * 
+     */
     Function();
+
+    /**
+     * @brief Get the value of the function for a given input
+     * 
+     * @param input Input variable of the function
+     * @return float Value of the function
+     */
     float getValue(const float &input) const;
 };
 

@@ -15,7 +15,6 @@ Shape::Shape(int n,
     // angle 0 must create a regular polygon
     angleTemp.paramSequence.delta.offset += 2 * PI / n;
 
-
     Sequence<conf::FunctionParameters> angles_seq(angleTemp.paramSequence.base, angleTemp.paramSequence.delta);
     Sequence<conf::FunctionParameters> radius_seq(radiusConf.paramSequence.base, radiusConf.paramSequence.delta);
     Sequence<conf::FunctionParameters> red_seq(redConf.paramSequence.base, redConf.paramSequence.delta);

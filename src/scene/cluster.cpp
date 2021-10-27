@@ -6,19 +6,19 @@ Cluster::Cluster(conf::Cluster conf, Timer &t)
     //create sequence of sequences (one sequence per shape) for each vertex property
 
     Sequence<conf::Sequence<conf::FunctionParameters>> angleSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.angle.paramSequenceSequence.base,
-                                                                   conf.angle.paramSequenceSequence.delta);
+                                                                                                                        conf.angle.paramSequenceSequence.delta);
 
     Sequence<conf::Sequence<conf::FunctionParameters>> radiusSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.radius.paramSequenceSequence.base,
-                                                                   conf.radius.paramSequenceSequence.delta);
+                                                                                                                         conf.radius.paramSequenceSequence.delta);
 
     Sequence<conf::Sequence<conf::FunctionParameters>> redSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.red.paramSequenceSequence.base,
-                                                                   conf.red.paramSequenceSequence.delta);
+                                                                                                                      conf.red.paramSequenceSequence.delta);
 
     Sequence<conf::Sequence<conf::FunctionParameters>> greenSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.green.paramSequenceSequence.base,
-                                                                   conf.green.paramSequenceSequence.delta);
+                                                                                                                        conf.green.paramSequenceSequence.delta);
 
     Sequence<conf::Sequence<conf::FunctionParameters>> blueSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.blue.paramSequenceSequence.base,
-                                                                   conf.blue.paramSequenceSequence.delta);
+                                                                                                                       conf.blue.paramSequenceSequence.delta);
 
     for (int i = 0; i < conf.amount; i++)
     {

@@ -7,9 +7,9 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include "../utility/utility.h"
-#include "../dynamic/dynamic.h"
-#include "../color/color.h"
+#include "utility.h"
+#include "dynamic.h"
+#include "color.h"
 
 class Vertex
 {
@@ -45,7 +45,7 @@ public:
      * 
      * @return RGB
      */
-    RGB getColor() const ;
+    RGB getColor() const;
 };
 
 #endif

@@ -10,8 +10,18 @@ class Cluster
     std::list<Shape> shapes;
 
 public:
+    /**
+     * @brief Construct a new Cluster object
+     * 
+     * @param conf Configuration
+     * @param t Timer
+     */
     Cluster(conf::Cluster conf, Timer &t);
 
+    /**
+     * @brief Draw all shapes of this cluster
+     * 
+     */
     void draw() const;
 };
 

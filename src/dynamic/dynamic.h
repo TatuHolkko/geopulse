@@ -2,9 +2,10 @@
 #define DYNAMIC_H
 
 template <typename T>
-class Dynamic{
+class Dynamic
+{
 public:
-    virtual ~Dynamic() {};
+    virtual ~Dynamic(){};
     virtual T get() const = 0;
 };
 

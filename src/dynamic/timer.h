@@ -48,6 +48,9 @@ public:
     /**
      * @brief Get the number of beats passed
      * 
+     * The value depends on the last time tick() was called, and not
+     * the time this function is called.
+     * 
      * @return float 
      */
     float getBeats() const;

@@ -14,14 +14,14 @@
 #include "function.h"
 #include "dynamic.h"
 #include "inputprovider.h"
-#include "../utility/utility.h"
+#include "utility.h"
 
-template<typename T>
+template <typename T>
 class Deviator : public Dynamic<T>
 {
 private:
     Function function;
-    InputProvider* inputProvider;
+    InputProvider *inputProvider;
 
 public:
     /**
@@ -30,7 +30,7 @@ public:
      * @param function Function configuration object describing the behavior of the value
      * @param ip input provider for the input into the mapper
      */
-    Deviator(const conf::Function& function, InputProvider& ip);
+    Deviator(const conf::Function &function, InputProvider &ip);
 
     /**
      * @brief Call the input provider and feed it to the mapper, which will

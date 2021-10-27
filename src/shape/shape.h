@@ -7,9 +7,9 @@
 #define SHAPE_H
 
 #include "vertex.h"
-#include "../dynamic/timer.h"
-#include "../dynamic/deviator.h"
-#include "../utility/utility.h"
+#include "timer.h"
+#include "deviator.h"
+#include "utility.h"
 #include <list>
 
 class Shape
@@ -31,11 +31,11 @@ public:
      * @param t timer
      */
     Shape(int n,
-          const conf::DeviatorSequence& angleConf,
-          const conf::DeviatorSequence& radiusConf,
-          const conf::DeviatorSequence& redConf,
-          const conf::DeviatorSequence& greenConf,
-          const conf::DeviatorSequence& blueConf,
+          const conf::DeviatorSequence &angleConf,
+          const conf::DeviatorSequence &radiusConf,
+          const conf::DeviatorSequence &redConf,
+          const conf::DeviatorSequence &greenConf,
+          const conf::DeviatorSequence &blueConf,
           Timer &t);
 
     /**

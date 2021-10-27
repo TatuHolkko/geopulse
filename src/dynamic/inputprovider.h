@@ -5,9 +5,10 @@
 #ifndef INPUTPROVIDER_H
 #define INPUTPROVIDER_H
 
-class InputProvider {
+class InputProvider
+{
 public:
-    virtual ~InputProvider() {};
+    virtual ~InputProvider(){};
     virtual float provideInput() = 0;
 };
 
