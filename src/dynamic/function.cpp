@@ -24,11 +24,18 @@ float Function::getValue(const float &input) const
     {
     case HalfSine:
         return halfSine(input);
-        break;
 
     case Sine:
         return sine(input);
-        break;
+
+    case Square:
+        return square(input);
+
+    case Saw:
+        return saw(input);
+
+    case Tri:
+        return tri(input);
     }
     throw "Logic error";
 }
@@ -40,6 +47,42 @@ float Function::sine(const float &input) const
 
 float Function::halfSine(const float &input) const
 {
-    float remainder = fmod(input + params.phase, params.period);
+    float remainder = periodize(input);
     return params.offset + params.amp * sin((remainder / params.period / 2) * 2 * PI - PI / 2);
+}
+
+float Function::square(const float &input) const
+{
+    float remainder = periodize(input);
+    if (remainder > params.period / 2)
+    {
+        return params.offset + params.amp;
+    }
+    else
+    {
+        return params.offset - params.amp;
+    }
+}
+
+float Function::saw(const float &input) const
+{
+    float remainder = periodize(input);
+    return params.offset + ((2 * remainder / params.period) - 1) * params.amp;
+}
+
+float Function::tri(const float &input) const
+{
+    float remainder = periodize(input);
+    int sign = 1;
+    if (remainder > (params.period / 2))
+    {
+        remainder -= params.period / 2;
+        sign = -1;
+    }
+    return params.offset + sign * ((remainder / (params.period / 4) - 1) * params.amp);
+}
+
+float Function::periodize(const float& input) const
+{
+    return fmod(input + params.phase, params.period);
 }

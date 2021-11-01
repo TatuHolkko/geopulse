@@ -24,7 +24,10 @@ typedef struct Point
 enum FunctionType
 {
     Sine,
-    HalfSine
+    HalfSine,
+    Square,
+    Saw,
+    Tri
 };
 
 namespace conf

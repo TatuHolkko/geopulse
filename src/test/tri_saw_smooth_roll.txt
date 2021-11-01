@@ -1,0 +1,64 @@
+bpm: 100;
+scene
+{
+    duration: 6;
+    shapes
+    {
+        amount: 4;
+        vertices: 4;
+        radius
+        {   
+            offset
+            {
+                base: 0.2;
+                dShape: 0.2;
+            }
+        }
+
+        angle
+        {
+            function: tri;
+            amplitude
+            {
+                base: 45;
+            }
+            period
+            {
+                base: 4;
+            }
+        }
+
+    }
+}
+
+scene
+{
+    duration: 2;
+    shapes
+    {
+        amount: 8;
+        vertices: 4;
+        radius
+        {   
+            offset
+            {
+                base: 0.2;
+                dShape: 0.1;
+            }
+        }
+
+        angle
+        {
+            function: saw;
+            amplitude
+            {
+                base: 45;
+            }
+            period
+            {
+                base: 2;
+            }
+        }
+
+    }
+}

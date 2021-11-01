@@ -21,8 +21,83 @@ class Function
 private:
     FunctionType type;
     conf::FunctionParameters params;
+    /**
+     * @brief Sine wave
+     * 
+     *        **
+     *      *    *
+     * ----*------*------*--------> input
+     *             *    *
+     *               **
+     * 
+     * @param input 
+     * @return float 
+     */
     float sine(const float &input) const;
+
+    /**
+     * @brief Half sine wave
+     * 
+     *                  *  *
+     *              *
+     * -----------*---------------> input
+     *          * 
+     *   *  * 
+     * 
+     * @param input 
+     * @return float 
+     */
     float halfSine(const float &input) const;
+
+    /**
+     * @brief Square wave
+     * 
+     *   * * * * *
+     *           *
+     * ----------*----------------> input
+     *           *
+     *           * * * * *
+     * 
+     * @param input 
+     * @return float 
+     */
+    float square(const float &input) const;
+
+    /**
+     * @brief Saw wave
+     * 
+     *                   *
+     *               *
+     * ----------*----------------> input
+     *       * 
+     *   *  
+     * 
+     * @param input 
+     * @return float 
+     */
+    float saw(const float &input) const;
+
+    /**
+     * @brief Triangle wave
+     * 
+     *           *
+     *         *   *
+     * ------*-------*-----------> input
+     *     *           *
+     *   *               *
+     * 
+     * @param input 
+     * @return float 
+     */
+    float tri(const float &input) const;
+
+    /**
+     * @brief Add phase into input and take remainder agains period
+     * 
+     * @param input 
+     * @return float 
+     */
+    float periodize(const float &input) const;
 
 public:
     /**

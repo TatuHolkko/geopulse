@@ -275,6 +275,18 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
             {
                 function.type = HalfSine;
             }
+            else if (sect.content == "square")
+            {
+                function.type = Square;
+            }
+            else if (sect.content == "saw")
+            {
+                function.type = Saw;
+            }
+            else if (sect.content == "tri")
+            {
+                function.type = Tri;
+            }
             else
             {
                 logger->errorRange({sect.content.start, sect.content.end}, "Invalid function type.");
