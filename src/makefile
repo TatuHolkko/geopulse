@@ -10,7 +10,7 @@ TARGET = geopulse
 VERBOSE = FALSE
 
 # Create the list of directories
-DIRS = scene dynamic color shape utility filehandler test performance
+DIRS = scene dynamic color shape utility filehandler test performance init
 SOURCEDIRS = $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
 TARGETDIRS = $(foreach dir, $(DIRS), $(addprefix $(BUILDDIR)/, $(dir)))
 
@@ -24,7 +24,6 @@ VPATH = $(SOURCEDIRS)
 
 # Create a list of *.cpp sources in DIRS
 SOURCES = $(foreach dir,$(SOURCEDIRS),$(wildcard $(dir)/*.cpp))
-SOURCES += $(wildcard *.cpp)
 
 # Define objects for all sources
 OBJS := $(subst $(SOURCEDIR),$(BUILDDIR),$(SOURCES:.cpp=.o))
@@ -73,10 +72,6 @@ $(1)/%.o: %.cpp
 	@echo Building $$@
 	$(HIDE)$$(CXX) $$(CXXFLAGS) -c $$(INCLUDES) -o $$(subst /,$$(PSEP),$$@) $$(subst /,$$(PSEP),$$<) -MMD
 endef
-
-main.o: main.cpp
-	@echo Building $@
-	$(HIDE)$(CXX) $(CXXFLAGS) -c $(INCLUDES) -o $(subst /,$(PSEP),$@) $(subst /,$(PSEP),$<) -MMD
 
 .PHONY: all clean directories 
 
