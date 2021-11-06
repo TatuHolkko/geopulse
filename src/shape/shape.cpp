@@ -2,6 +2,7 @@
 #include "../dynamic/deviator.h"
 #include "../dynamic/sequence.h"
 #include <GL/glut.h>
+#include <cmath>
 
 Shape::Shape(int n,
              const conf::DeviatorSequence &angleConf,
@@ -21,8 +22,25 @@ Shape::Shape(int n,
     Sequence<conf::FunctionParameters> green_seq(greenConf.paramSequence.base, greenConf.paramSequence.delta);
     Sequence<conf::FunctionParameters> blue_seq(blueConf.paramSequence.base, blueConf.paramSequence.delta);
 
+    const bool odd = n % 2;
+    int symmetryPoint = floor(0.5 * n) + 1;
     for (int i = 0; i < n; i++)
     {
+        if (i == symmetryPoint)
+        {
+            //if(angleTemp.dVertexSymmetry  == mirror) angles_seq.reflect(odd);
+            if(radiusConf.dVertexSymmetry == mirror) radius_seq.reflect(odd);
+            if(redConf.dVertexSymmetry    == mirror) red_seq   .reflect(odd);
+            if(greenConf.dVertexSymmetry  == mirror) green_seq .reflect(odd);
+            if(blueConf.dVertexSymmetry   == mirror) blue_seq  .reflect(odd);
+
+            //if(angleTemp.dVertexSymmetry  == wrap) angles_seq.reset();
+            if(radiusConf.dVertexSymmetry == wrap) radius_seq.reset();
+            if(redConf.dVertexSymmetry    == wrap) red_seq   .reset();
+            if(greenConf.dVertexSymmetry  == wrap) green_seq .reset();
+            if(blueConf.dVertexSymmetry   == wrap) blue_seq  .reset(); 
+        }
+
         deviators.push_back(Deviator<float>({angleTemp.type, angles_seq.next()}, t));
         Deviator<float> *angle_dev = &deviators.back();
 

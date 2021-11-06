@@ -29,6 +29,7 @@ typedef struct Deviator
 typedef struct Function
 {
     FunctionType type = Sine;
+    VertexSymmetryMode dVertexSymmetry = off;
     Deviator phase;
     Deviator period = {.base = 1, .dShape = 0, .dVertex = 0, .ddVertex = 0};
     Deviator amplitude;
@@ -39,15 +40,15 @@ static Logger *logger;
 
 const conf::Cluster defaultCluster = {.vertices = 6,
                                       .amount = 1,
-                                      .angle = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+                                      .angle = {.type = Sine, .dVertexSymmetry = off, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
 
-                                      .radius = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0.5}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0.1}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+                                      .radius = {.type = Sine, .dVertexSymmetry = off, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0.5}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0.1}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
 
-                                      .red = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+                                      .red = {.type = Sine, .dVertexSymmetry = off, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
 
-                                      .green = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
+                                      .green = {.type = Sine, .dVertexSymmetry = off, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}},
 
-                                      .blue = {.type = Sine, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}}};
+                                      .blue = {.type = Sine, .dVertexSymmetry = off, .paramSequenceSequence = {.base = {.base = {.phase = 0, .period = 1, .amp = 0, .offset = 1}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}, .delta = {.base = {.phase = 0, .period = 0, .amp = 0, .offset = 0}, .delta = {.phase = 0, .period = 0, .amp = 0, .offset = 0}}}}};
 
 const conf::Phrase defaultPhrase = {
     .duration = 16,
@@ -265,6 +266,26 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
         {
             configureDeviator(function.offset, sect.content.start, sect.content.end);
         }
+        else if (sect.name == "dVertexSymmetry")
+        {
+            if (sect.content == "off")
+            {
+                function.dVertexSymmetry = off;
+            }
+            else if (sect.content == "mirror")
+            {
+                function.dVertexSymmetry = mirror;
+            }
+            else if (sect.content == "wrap")
+            {
+                function.dVertexSymmetry = wrap;
+            }
+            else
+            {
+                logger->errorRange({sect.content.start, sect.content.end}, "Invalid dVertexSymmetry value.");
+                throw ParsingException();
+            }
+        }
         else if (sect.name == "function")
         {
             if (sect.content == "sine")
@@ -306,6 +327,8 @@ void configureFunction(Function &function, str_cit confStart, str_cit confEnd)
 void convertToInternalConf(conf::DeviatorSequenceSequence &internalConf, Function &fileConf)
 {
     internalConf.type = fileConf.type;
+
+    internalConf.dVertexSymmetry = fileConf.dVertexSymmetry;
 
     internalConf.paramSequenceSequence.base.base.phase = fileConf.phase.base;
     internalConf.paramSequenceSequence.base.delta.phase = fileConf.phase.dVertex;

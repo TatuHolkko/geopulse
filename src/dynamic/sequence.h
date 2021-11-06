@@ -9,15 +9,23 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
-#include <list>
+#include <vector>
+
+enum Step
+{
+    forward = 1,
+    backward = -1
+};
 
 template <typename T>
 class Sequence
 {
 private:
-    std::list<T> items;
+    std::vector<T> items;
     T base;
     T delta;
+    int index;
+    Step step;
 
 public:
     /**
@@ -29,11 +37,26 @@ public:
     Sequence(const T &base, const T &delta);
 
     /**
-     * @brief Add delta and create a new object
+     * @brief Create a new object adjusted by delta
      * 
      * @return T&
      */
     T &next();
+
+    /**
+     * @brief Change the direction of delta
+     * 
+     * @param inclusive if true, next() will not add delta during next call
+     * 
+     * The inclusive parameter in effect determines whether the mirror
+     * is placed at an element or in between two elements
+     */
+    void reflect(bool inclusive);
+
+    /**
+     * @brief Reset current item to base
+     */
+    void reset();
 };
 
 #endif

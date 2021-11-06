@@ -1,0 +1,98 @@
+bpm: 300;
+scene
+{
+    duration: 420;
+    shapes
+    {
+        amount: 64;
+        vertices: 256;
+        radius
+        {   
+            function: sine;
+            dVertexSymmetry: mirror;
+            offset
+            {
+                base: 0.2;
+                dShape: 0.02;
+            }
+            period
+            {
+                base: 4;
+            }
+            phase
+            {
+                ddVertex: 0.02;
+            }
+            amplitude
+            {
+                base: 0.01;
+            }
+        }
+        red
+        {   
+            function: sine;
+            dVertexSymmetry: mirror;
+            offset
+            {
+                base: 0;
+            }
+            period
+            {
+                base: 1;
+                ddVertex: 0.01;
+            }
+            phase
+            {
+                ddVertex: 0.02;
+            }
+            amplitude
+            {
+                base: 0.5;
+            }
+        }
+        green
+        {   
+            function: sine;
+            dVertexSymmetry: mirror;
+            offset
+            {
+                base: 0.5;
+            }
+            period
+            {
+                base: 1;
+                ddVertex: 0.01;
+            }
+            phase
+            {
+                ddVertex: 0.04;
+            }
+            amplitude
+            {
+                base: 0.5;
+            }
+        }
+        blue
+        {   
+            function: sine;
+            dVertexSymmetry: mirror;
+            offset
+            {
+                base: 0.5;
+            }
+            period
+            {
+                base: 1;
+                ddVertex: 0.01;
+            }
+            phase
+            {
+                ddVertex: -0.04;
+            }
+            amplitude
+            {
+                base: 0.5;
+            }
+        }
+    }
+}

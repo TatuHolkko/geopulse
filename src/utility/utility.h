@@ -30,6 +30,13 @@ enum FunctionType
     Tri
 };
 
+enum VertexSymmetryMode
+{
+    off,
+    mirror,
+    wrap
+};
+
 namespace conf
 {
     template <typename T>
@@ -50,12 +57,14 @@ namespace conf
     typedef struct DeviatorSequence
     {
         FunctionType type;
+        VertexSymmetryMode dVertexSymmetry;
         Sequence<FunctionParameters> paramSequence;
     } DeviatorSequence;
 
     typedef struct DeviatorSequenceSequence
     {
         FunctionType type;
+        VertexSymmetryMode dVertexSymmetry;
         Sequence<Sequence<FunctionParameters>> paramSequenceSequence;
     } DeviatorSequenceSequence;
 

@@ -25,13 +25,8 @@ int main(int argc, char *argv[])
 	InputParser input(argc, argv);
 	conf::Performance perf;
 	
-	try
+	if(!read(perf, getPath(input)))
 	{
-		read(perf, getPath(input));
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
 		return 1;
 	}
 
@@ -41,6 +36,7 @@ int main(int argc, char *argv[])
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1000, 1000);
 	glutCreateWindow("GeoPulse");
+	glLineWidth(2);
 
 	performance = new Performance(perf, *timer);
 

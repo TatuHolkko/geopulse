@@ -8,8 +8,8 @@ scene
         vertices: 256;
         radius
         {   
-            function: saw;
-            dVertexSymmetry: wrap;
+            function: sine;
+            dVertexSymmetry: mirror;
             offset
             {
                 base: 0.2;

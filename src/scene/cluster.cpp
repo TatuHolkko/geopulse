@@ -5,20 +5,20 @@ Cluster::Cluster(conf::Cluster conf, Timer &t)
 
     //create sequence of sequences (one sequence per shape) for each vertex property
 
-    Sequence<conf::Sequence<conf::FunctionParameters>> angleSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.angle.paramSequenceSequence.base,
-                                                                                                                        conf.angle.paramSequenceSequence.delta);
+    Sequence<conf::Sequence<conf::FunctionParameters>> angleSeqSeq(conf.angle.paramSequenceSequence.base,
+                                                                   conf.angle.paramSequenceSequence.delta);
 
-    Sequence<conf::Sequence<conf::FunctionParameters>> radiusSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.radius.paramSequenceSequence.base,
-                                                                                                                         conf.radius.paramSequenceSequence.delta);
+    Sequence<conf::Sequence<conf::FunctionParameters>> radiusSeqSeq(conf.radius.paramSequenceSequence.base,
+                                                                    conf.radius.paramSequenceSequence.delta);
 
-    Sequence<conf::Sequence<conf::FunctionParameters>> redSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.red.paramSequenceSequence.base,
-                                                                                                                      conf.red.paramSequenceSequence.delta);
+    Sequence<conf::Sequence<conf::FunctionParameters>> redSeqSeq(conf.red.paramSequenceSequence.base,
+                                                                 conf.red.paramSequenceSequence.delta);
 
-    Sequence<conf::Sequence<conf::FunctionParameters>> greenSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.green.paramSequenceSequence.base,
-                                                                                                                        conf.green.paramSequenceSequence.delta);
+    Sequence<conf::Sequence<conf::FunctionParameters>> greenSeqSeq(conf.green.paramSequenceSequence.base,
+                                                                   conf.green.paramSequenceSequence.delta);
 
-    Sequence<conf::Sequence<conf::FunctionParameters>> blueSeqSeq = Sequence<conf::Sequence<conf::FunctionParameters>>(conf.blue.paramSequenceSequence.base,
-                                                                                                                       conf.blue.paramSequenceSequence.delta);
+    Sequence<conf::Sequence<conf::FunctionParameters>> blueSeqSeq(conf.blue.paramSequenceSequence.base,
+                                                                  conf.blue.paramSequenceSequence.delta);
 
     for (int i = 0; i < conf.amount; i++)
     {
@@ -27,22 +27,27 @@ Cluster::Cluster(conf::Cluster conf, Timer &t)
             conf.vertices,
             {
                 .type = conf.angle.type,
+                .dVertexSymmetry = conf.angle.dVertexSymmetry,
                 .paramSequence = angleSeqSeq.next(),
             },
             {
                 .type = conf.radius.type,
+                .dVertexSymmetry = conf.radius.dVertexSymmetry,
                 .paramSequence = temp,
             },
             {
                 .type = conf.red.type,
+                .dVertexSymmetry = conf.red.dVertexSymmetry,
                 .paramSequence = redSeqSeq.next(),
             },
             {
                 .type = conf.green.type,
+                .dVertexSymmetry = conf.green.dVertexSymmetry,
                 .paramSequence = greenSeqSeq.next(),
             },
             {
                 .type = conf.blue.type,
+                .dVertexSymmetry = conf.blue.dVertexSymmetry,
                 .paramSequence = blueSeqSeq.next(),
             },
             t));
