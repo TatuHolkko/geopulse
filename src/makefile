@@ -32,14 +32,14 @@ OBJS := $(subst $(SOURCEDIR),$(BUILDDIR),$(SOURCES:.cpp=.o))
 DEPS = $(OBJS:.o=.d)
 
 # Compile flags
-CXXFLAGS += -Wall -g
+CXXFLAGS += -Wall -g -static -static-libgcc -static-libstdc++
 
 # Libraries
 LDFLAGS  += -L/usr/lib/x86_64-linux-gnu
 LDFLAGS  += -L/usr/lib/libGL
 LDFLAGS  += -L/usr/local/lib
 
-LDLIBS   += -lGL -lGLU -lglut
+LDLIBS   += -lGL -lGLU -lglut -lfreeimage
 
 # OS specific part
 ifeq ($(OS),Windows_NT)

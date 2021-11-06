@@ -9,6 +9,8 @@
 #include <GL/glut.h>
 #include <algorithm>
 #include <vector>
+#include <string>
+#include <FreeImage.h>
 
 Performance *performance;
 Timer *timer;
@@ -19,6 +21,23 @@ Timer *timer;
 std::string getPath(InputParser input);
 void redraw();
 void tick(int value);
+
+int width = 1920;
+int height = 1080;
+
+long n = 0;
+
+uint8_t* pixels = new uint8_t[3 * width * height];
+
+void saveScreen()
+{	
+	const char* filename = (std::string("images/") + std::to_string(n) + std::string(".jpeg")).c_str();
+	glReadPixels(0, 0, width, height, GL_BGR, GL_UNSIGNED_BYTE, pixels);
+    
+	FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, 3 * width, 24, 0x0000FF, 0xFF0000, 0x00FF00, false);
+	FreeImage_Save(FIF_JPEG, image, filename, 0);
+	n++;
+}
 
 int main(int argc, char *argv[])
 {
@@ -34,13 +53,14 @@ int main(int argc, char *argv[])
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(1000, 1000);
+	glutInitWindowSize(1920, 1080);
 	glutCreateWindow("GeoPulse");
 	glLineWidth(2);
 
 	performance = new Performance(perf, *timer);
 
 	glutDisplayFunc(redraw);
+
 	glutTimerFunc(TICK_DURATION, &tick, 0);
 	glutMainLoop();
 
@@ -54,6 +74,10 @@ int main(int argc, char *argv[])
 void redraw()
 {
 	performance->draw();
+	if(n <= 3177)
+	{
+		saveScreen();
+	}
 }
 
 void tick(int value)

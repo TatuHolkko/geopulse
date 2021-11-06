@@ -87,9 +87,9 @@ void Shape::draw() const
         Point pos1 = previous->getPos();
         //end
         Point pos2 = current->getPos();
-
-        glVertex3f(pos1.x, pos1.y, 0);
-        glVertex3f(pos2.x, pos2.y, 0);
+        const float c = 1920.0/1080.0;
+        glVertex3f(pos1.x / c, pos1.y, 0);
+        glVertex3f(pos2.x / c, pos2.y, 0);
 
         previous = current;
         current = next(current);
