@@ -4,11 +4,11 @@ scene
     duration: 16;
     shapes
     {
-        amount: 32;
+        amount: 4;
         vertices: 6;
         radius
         {   
-            function: tri;
+            function: square;
             dVertexSymmetry: mirror;
             offset
             {
@@ -21,27 +21,27 @@ scene
             }
             phase
             {
-                dShape: 0.1;
+                dShape: 1;
             }
             amplitude
             {
-                base: 0.04;
+                base: 0.2;
             }
         }
         angle
         {
-            function: halfsine;
+            function: tri;
             period
             {
                 base: 4;
             }
             phase
             {
-                dShape: 0.1;
+                dShape: 1;
             }
             amplitude
             {
-                base: 45;
+                base: 60;
             }
         }
         blue
@@ -78,13 +78,13 @@ scene
             }
         }
     }
-     shapes
+    shapes
     {
         amount: 4;
-        vertices: 8;
+        vertices: 3;
         radius
         {   
-            function: halfsine;
+            function: tri;
             dVertexSymmetry: mirror;
             offset
             {
@@ -93,7 +93,7 @@ scene
             }
             period
             {
-                base: 4;
+                base: 2;
             }
             phase
             {
@@ -106,18 +106,18 @@ scene
         }
         angle
         {
-            function: halfsine;
+            function: square;
             period
             {
                 base: 4;
             }
             phase
             {
-                dShape: -22.5;
+                dShape: -1;
             }
             amplitude
             {
-                base: 45;
+                base: 30;
             }
         }
         red
@@ -126,6 +126,10 @@ scene
             offset
             {
                 base: 1;
+            }
+            amplitude
+            {
+                dShape: 0.1;
             }
         }
         green

@@ -30,6 +30,13 @@ public:
      * 
      */
     void draw() const;
+
+    /**
+     * @brief Get the duration in beats
+     * 
+     * @return float
+     */
+    float getDuration();
 };
 
 #endif

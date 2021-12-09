@@ -1,0 +1,81 @@
+bpm: 145;
+scene
+{
+    duration: 16;
+    shapes
+    {
+        amount: 6;
+        vertices: 8;
+        radius
+        {   
+            function: square;
+            dVertexSymmetry: mirror;
+            offset
+            {
+                base: 0.2;
+                dShape: 0.2;
+            }
+            period
+            {
+                base: 4;
+            }
+            phase
+            {
+                dShape: 0.1;
+            }
+            amplitude
+            {
+                base: 0.04;
+            }
+        }
+        angle
+        {
+            function: halfsine;
+            period
+            {
+                base: 4;
+            }
+            phase
+            {
+                dShape: -22.5;
+            }
+            amplitude
+            {
+                base: 45;
+            }
+        }
+        red
+        {
+            function: sine;
+            offset
+            {
+                base: 1;
+            }
+        }
+        green
+        {
+            function: sine;
+            offset
+            {
+                base: 0;
+            }
+        }
+        blue
+        {
+            function: sine;
+            offset
+            {
+                base: 0;
+            }
+            period
+            {
+                base: 1;
+                dShape: 1;
+            }
+            amplitude
+            {
+                dShape: 0.2;
+            }
+        }
+    }
+}

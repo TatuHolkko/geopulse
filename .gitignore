@@ -34,3 +34,6 @@ geopulse
 
 # vscode
 .vscode/
+
+# exports
+export/

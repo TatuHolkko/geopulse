@@ -1,0 +1,115 @@
+bpm: 145;
+scene
+{
+    duration: 16;
+    shapes
+    {
+        amount: 32;
+        vertices: 16;
+        radius
+        {   
+            function: square;
+            dVertexSymmetry: wrap;
+            offset
+            {
+                base: 0.4;
+                dShape: 0.1;
+            }
+            period
+            {
+                base: 4;
+            }
+            phase
+            {
+                ddVertex: 2;
+            }
+            amplitude
+            {
+                base: 0.05;
+            }
+        }
+        angle
+        {
+            function: halfsine;
+            period
+            {
+                base: 1;
+                dShape: 0.125;
+            }
+            phase
+            {
+                dShape: 1;
+            }
+            amplitude
+            {
+                base: 22.5;
+            }
+        }
+        green
+        {
+            function: sine;
+            offset
+            {
+                base: 1;
+            }
+        }
+        red
+        {
+            function: sine;
+            offset
+            {
+                base: 0.5;
+            }
+        }
+        blue
+        {
+            function: sine;
+            offset
+            {
+                base: 0;
+            }
+            period
+            {
+                base: 1;
+                ddVertex: 0.125;
+            }
+            amplitude
+            {
+                dShape: 0.2;
+            }
+        }
+    }
+    shapes
+    {
+        amount: 4;
+        vertices: 4;
+        radius
+        {
+            offset
+            {
+                base: 0.05;
+                dShape: 0.04;
+            }
+            amplitude
+            {
+                base: 0.02;
+            }
+            phase
+            {
+                dShape: 0.03;
+            }
+        }
+        angle
+        {
+            amplitude
+            {
+                base: 22.5;
+            }
+            period
+            {
+                base: 4;
+            }
+        }
+
+    }
+}

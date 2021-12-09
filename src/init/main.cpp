@@ -3,6 +3,7 @@
 #include "utility.h"
 #include "filehandler.h"
 #include "inputparser.h"
+#include "export.h"
 
 #include <iostream>
 #include <fstream>
@@ -10,7 +11,6 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-#include <FreeImage.h>
 
 Performance *performance;
 Timer *timer;
@@ -25,23 +25,13 @@ void tick(int value);
 int width = 1920;
 int height = 1080;
 
-long n = 0;
-
-uint8_t* pixels = new uint8_t[3 * width * height];
-
-void saveScreen()
-{	
-	const char* filename = (std::string("images/") + std::to_string(n) + std::string(".jpeg")).c_str();
-	glReadPixels(0, 0, width, height, GL_BGR, GL_UNSIGNED_BYTE, pixels);
-    
-	FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, 3 * width, 24, 0x0000FF, 0xFF0000, 0x00FF00, false);
-	FreeImage_Save(FIF_JPEG, image, filename, 0);
-	n++;
-}
+bool exportActive = false;
+Export* exp = nullptr;
 
 int main(int argc, char *argv[])
 {
 	InputParser input(argc, argv);
+
 	conf::Performance perf;
 	
 	if(!read(perf, getPath(input)))
@@ -59,6 +49,12 @@ int main(int argc, char *argv[])
 
 	performance = new Performance(perf, *timer);
 
+	if (input.cmdOptionExists("-e"))
+	{
+		exp = new Export(1000.0/TICK_DURATION, perf.bpm, performance->getDuration(), width, height);
+		exportActive = true;
+	}
+
 	glutDisplayFunc(redraw);
 
 	glutTimerFunc(TICK_DURATION, &tick, 0);
@@ -66,17 +62,17 @@ int main(int argc, char *argv[])
 
 	delete performance;
 	delete timer;
+	delete exp;
 
 	return 0;
 }
 
-
 void redraw()
 {
 	performance->draw();
-	if(n <= 3177)
+	if (exportActive)
 	{
-		saveScreen();
+		exp->displayUpdated();
 	}
 }
 

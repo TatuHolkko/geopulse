@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-Performance::Performance(const conf::Performance conf, Timer &t) : phrases({}), timer(&t)
+Performance::Performance(const conf::Performance conf, Timer &t) : phrases({}), timer(&t), duration(0)
 {
     for (const conf::Phrase &phraseConf : conf.phrases)
     {
@@ -37,4 +37,9 @@ void Performance::draw() const
             break;
         }
     }
+}
+
+float Performance::getDuration()
+{
+    return duration;
 }
